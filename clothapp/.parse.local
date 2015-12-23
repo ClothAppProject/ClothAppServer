@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "_default": {
+      "link": "clothapp"
+    },
+    "clothapp": {
+      "applicationId": "JdgT5RtwJaaoDRNe9bx5LF3TyVj20RGXMKMv6jQ8"
+    }
+  }
+}

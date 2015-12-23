@@ -1,0 +1,179 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    title ClothApp
+    // Bootstrap Core CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', type='text/css')
+    // Custom Fonts
+    link(href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800', rel='stylesheet', type='text/css')
+    link(href='http://fonts.googleapis.com/css?family=Lato:400,300,300italic,400italic,700,700italic,900,900italic', rel='stylesheet', type='text/css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', type='text/css')
+    // Plugin CSS
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.0/animate.min.css', type='text/css')
+    // Custom CSS
+    link(rel='stylesheet', href='css/creative.css', type='text/css')
+    // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
+    // WARNING: Respond.js doesn't work if you view the page via file://
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
+      script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
+  body#page-top
+    nav#mainNav.navbar.navbar-default.navbar-fixed-top
+      .container-fluid
+        // Brand and toggle get grouped for better mobile display
+        .navbar-header
+          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#bs-example-navbar-collapse-1')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand.page-scroll(href='#page-top') ClothApp
+        // Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            li
+              a.page-scroll(href='#about') About
+            li
+              a.page-scroll(href='#services') Main Features
+            li
+              a.page-scroll(href='#portfolio') Gallery
+            li
+              a.page-scroll(href='#contact') Contact Us
+        // /.navbar-collapse
+      // /.container-fluid
+    header
+      .header-content
+        .header-content-inner
+          h1 ClothApp
+          hr
+          p Share your favorite shops and clothes and let your friends see your style!
+          a.btn.btn-primary.btn-xl.page-scroll(href='#about')
+            | ClothApp on Github  
+            span.fa.fa-github-square
+    section#about.bg-primary
+      .container
+        .row
+          .col-lg-8.col-lg-offset-2.text-center
+            h2.section-heading Share your outfits and your favorite shops!
+            hr.light
+            p.text-faded
+              | text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
+            a.btn.btn-default.btn-xl(href='#') Coming soon!
+    section#services
+      .container
+        .row
+          .col-lg-12.text-center
+            h2.section-heading Main Features
+            hr.primary
+      .container
+        .row
+          .col-lg-3.col-md-6.text-center
+            .service-box
+              i.fa.fa-4x.fa-users.wow.bounceIn.text-primary
+              h3 Share your style
+              p.text-muted A fast and easy way to share your clothes, favorite shops and brands.
+          .col-lg-3.col-md-6.text-center
+            .service-box
+              i.fa.fa-4x.fa-shopping-bag.wow.bounceIn.text-primary(data-wow-delay='.1s')
+              h3 Discover new shops and brands
+              p.text-muted Get recommendations based on what your friends do.
+          .col-lg-3.col-md-6.text-center
+            .service-box
+              i.fa.fa-4x.fa-comments.wow.bounceIn.text-primary(data-wow-delay='.2s')
+              h3 Follow your friends: get inspired
+              p.text-muted Find out what your friends are wearing and buying.
+          .col-lg-3.col-md-6.text-center
+            .service-box
+              i.fa.fa-4x.fa-heart.wow.bounceIn.text-primary(data-wow-delay='.3s')
+              h3 Made by normal people for normal people
+              p.text-muted Help us making this app accessible to everyone.
+    section#portfolio.no-padding
+      .container-fluid
+        .row.no-gutter
+          .col-lg-4.col-sm-6
+            a.portfolio-box(href='#')
+              img.img-responsive(src='img/portfolio/1.jpg', alt='')
+              .portfolio-box-caption
+                .portfolio-box-caption-content
+                  .project-category.text-faded
+                    | Category
+                  .project-name
+                    | Project Clothes
+          .col-lg-4.col-sm-6
+            a.portfolio-box(href='#')
+              img.img-responsive(src='img/portfolio/2.jpg', alt='')
+              .portfolio-box-caption
+                .portfolio-box-caption-content
+                  .project-category.text-faded
+                    | Category
+                  .project-name
+                    | Project Accessories
+          .col-lg-4.col-sm-6
+            a.portfolio-box(href='#')
+              img.img-responsive(src='img/portfolio/3.jpg', alt='')
+              .portfolio-box-caption
+                .portfolio-box-caption-content
+                  .project-category.text-faded
+                    | Category
+                  .project-name
+                    | Project Shoes
+          .col-lg-4.col-sm-6
+            a.portfolio-box(href='#')
+              img.img-responsive(src='img/portfolio/4.jpg', alt='')
+              .portfolio-box-caption
+                .portfolio-box-caption-content
+                  .project-category.text-faded
+                    | Category
+                  .project-name
+                    | Project Favorite Shops
+          .col-lg-4.col-sm-6
+            a.portfolio-box(href='#')
+              img.img-responsive(src='img/portfolio/5.jpg', alt='')
+              .portfolio-box-caption
+                .portfolio-box-caption-content
+                  .project-category.text-faded
+                    | Category
+                  .project-name
+                    | Project Favorite Brands
+          .col-lg-4.col-sm-6
+            a.portfolio-box(href='#')
+              img.img-responsive(src='img/portfolio/6.jpg', alt='')
+              .portfolio-box-caption
+                .portfolio-box-caption-content
+                  .project-category.text-faded
+                    | Category
+                  .project-name
+                    | Project Get Inspired
+    aside.bg-dark
+      .container.text-center
+        .call-to-action
+          h2 Download it for free on Android!
+          a.btn.btn-default.btn-xl.wow.tada(href='#') Coming Soon!
+    section#contact
+      .container
+        .row
+          .col-lg-8.col-lg-offset-2.text-center
+            h2.section-heading Contact us
+            hr.primary
+            p Any help is really appreciated!
+          .col-lg-8.col-lg-offset-2.text-center
+            i.fa.fa-envelope-square.fa-4x.wow.bounceIn(data-wow-delay='.1s')
+            p
+              a(href='mailto:your-email@your-domain.com') Click here to mail us!
+    // jQuery
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+    // Bootstrap Core JavaScript
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+    // Plugin JavaScript
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/FitText.js/1.2.0/jquery.fittext.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js')
+    // Custom Theme JavaScript
+    script(src='js/custom.js')
+
+
