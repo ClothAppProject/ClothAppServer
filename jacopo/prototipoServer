@@ -84,6 +84,17 @@ app.delete('/profile/:id', function (req, res) {
 app.post('/profile/:id', function (req, res) {
     //da implementare
 });
+
+// invia una foto con id del profilo all'indirizzo del profilo, volendo si possono aumentare i campi ,attualmente l'immagine viene inviata e ricevuta ma ha dei probemi nel salvataggio il metodo
+var cpUpload = upload.fields([{ name: 'Id' }, { name: 'image' }]);
+app.post('/profile/:id',cpUpload,function(req, res){
+fs.writeFile(__dirname + '/temp/foto'+".png", req.files['image']);
+    console.log(req.body);
+    console.log(req.files['Íd']);
+    
+});	
+    
+   
    
    
    
