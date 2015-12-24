@@ -1,0 +1,102 @@
+var express = require('express');
+var app = express();
+var request = require('request');
+var multer = require('multer'); // v1.0.5
+var upload = multer(); // for parsing multipart/form-data
+
+
+
+
+//dati del server mysql
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : 'opocaJ95',
+  database : 'clothapp'
+});
+
+
+//connessione al server mysql
+connection.connect();
+
+
+
+//funzione di benvenuto
+app.get('/', function (req, res) {
+  res.send('ClothApp rulez!');
+});
+
+
+
+
+
+//crea un nuovo profilo
+var profilo= upload.fields([{ name: 'nome', maxCount: 1 }, { name: 'id', maxCount: 1 }]); 
+/* i parametri nella post devono rispettare la struttura di profilo
+ * NB. ci possono essere chiavi in più oltre a 'nome' e 'id', ma vengono ignorate
+ */
+app.post('/profile/create', profilo, function (req, res) {
+    console.log(req.body);  //stampa di debug
+    if(req.body.id !== undefined && req.body.nome !== undefined) {  //controllo se i paramentri necessari sono vuoti oppure no
+        console.log(req.body); //stampa di debug
+        //inserisco nel database i nuovi parametri
+        connection.query('INSERT INTO utenti SET ?',{nome:req.body.nome, id:req.body.id}, function(err, result) {
+            if (err){ 
+                //stampa di debug
+                console.log(err);
+                //informo il client dell'errore
+                res.send('parametri non validi');
+            }
+            else res.send('ok');
+        });           
+    }
+     else res.send('parametri non validi');        
+});
+
+
+
+//richiedi un profilo
+app.get('/profile/:id', function (req, res) {
+    connection.query('SELECT nome FROM  utenti WHERE id='+req.params.id, function(err, rows, fields) {
+        if (err) throw err;
+        console.log('The solution is: ', rows);
+        res.send(rows);      
+    });       
+});
+
+
+
+
+//cancella un profilo
+app.delete('/profile/:id', function (req, res) {    
+    connection.query('DELETE FROM utenti WHERE id='+req.params.id, function (err, result) {
+        if (err) throw err;
+        console.log('deleted ' + result.affectedRows + ' rows');
+        res.send("profilo cancellato");
+    })
+});
+
+
+
+
+//aggiorna profilo
+app.post('/profile/:id', function (req, res) {
+    //da implementare
+});
+   
+   
+   
+   
+
+
+
+
+
+
+var server = app.listen(3000, function () {
+  var host = server.address().address;
+  var port = server.address().port;
+
+  console.log('Clothapp listening at http://%s:%s', host, port);
+});
