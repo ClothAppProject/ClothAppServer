@@ -17,5 +17,26 @@ app.get('/', function(req, res) {
  	res.render('index');
 });
 
+
+//crea nuovo profilo
+app.post('/profile/create', function (req, res) {
+    //da implementare 
+});
+
+//richiedi un profilo
+app.get('/profile/:nome', function (req, res) {
+    var query=new Parse.Query("utenti");
+    query.equalTo("nome",req.params.nome);
+    query.find({
+    success: function(results) {      
+      res.send(results);
+    },
+    error: function() {
+      res.send("failed");
+    }
+  });
+});
+
+
 // Attach the Express app to Cloud Code.
 app.listen();
