@@ -4,8 +4,6 @@ html(lang='en')
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    meta(name='description', content='')
-    meta(name='author', content='')
     title ClothApp
     // Bootstrap Core CSS
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', type='text/css')
@@ -39,9 +37,7 @@ html(lang='en')
             li
               a.page-scroll(href='#about') About
             li
-              a.page-scroll(href='#services') Main Features
-            li
-              a.page-scroll(href='#portfolio') Gallery
+              a.page-scroll(href='#gallery') Gallery
             li
               a.page-scroll(href='#contact') Contact Us
         // /.navbar-collapse
@@ -55,100 +51,97 @@ html(lang='en')
           a.btn.btn-primary.btn-xl.page-scroll(href='#about')
             | ClothApp on Github  
             span.fa.fa-github-square
+    
     section#about.bg-primary
       .container
         .row
           .col-lg-8.col-lg-offset-2.text-center
-            h2.section-heading Share your outfits and your favorite shops!
+            h2.section-heading About ClothApp
             hr.light
             p.text-faded
-              | text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
-            a.btn.btn-default.btn-xl(href='#') Coming soon!
-    section#services
-      .container
-        .row
-          .col-lg-12.text-center
-            h2.section-heading Main Features
-            hr.primary
+                  | text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text
       .container
         .row
           .col-lg-3.col-md-6.text-center
             .service-box
-              i.fa.fa-4x.fa-users.wow.bounceIn.text-primary
+              i.fa.fa-4x.fa-users.wow.bounceIn(color='white')
               h3 Share your style
-              p.text-muted A fast and easy way to share your clothes, favorite shops and brands.
+              br
+              p.text-faded A fast and easy way to share your clothes, favorite shops and brands.
           .col-lg-3.col-md-6.text-center
             .service-box
-              i.fa.fa-4x.fa-shopping-bag.wow.bounceIn.text-primary(data-wow-delay='.1s')
+              i.fa.fa-4x.fa-shopping-bag.wow.bounceIn(color='white', data-wow-delay='.1s')
               h3 Discover new shops and brands
-              p.text-muted Get recommendations based on what your friends do.
+              p.text-faded Get recommendations based on what your friends do.
           .col-lg-3.col-md-6.text-center
             .service-box
-              i.fa.fa-4x.fa-comments.wow.bounceIn.text-primary(data-wow-delay='.2s')
+              i.fa.fa-4x.fa-comments.wow.bounceIn(color='white', data-wow-delay='.2s')
               h3 Follow your friends: get inspired
-              p.text-muted Find out what your friends are wearing and buying.
+              p.text-faded Find out what your friends are wearing and buying.
           .col-lg-3.col-md-6.text-center
             .service-box
-              i.fa.fa-4x.fa-heart.wow.bounceIn.text-primary(data-wow-delay='.3s')
+              i.fa.fa-4x.fa-heart.wow.bounceIn(color='white', data-wow-delay='.3s')
               h3 Made by normal people for normal people
-              p.text-muted Help us making this app accessible to everyone.
-    section#portfolio.no-padding
+              p.text-faded Help us making this app accessible to everyone.
+        .row
+            .col-lg-8.col-lg-offset-2.text-center
+    section#gallery.no-padding
       .container-fluid
         .row.no-gutter
           .col-lg-4.col-sm-6
             a.portfolio-box(href='#')
-              img.img-responsive(src='img/portfolio/1.jpg', alt='')
+              img.img-responsive(src='img/gallery/1.jpg', alt='')
               .portfolio-box-caption
                 .portfolio-box-caption-content
                   .project-category.text-faded
-                    | Category
+                    | ClothApp
                   .project-name
-                    | Project Clothes
+                    | Clothes
           .col-lg-4.col-sm-6
             a.portfolio-box(href='#')
-              img.img-responsive(src='img/portfolio/2.jpg', alt='')
+              img.img-responsive(src='img/gallery/2.jpg', alt='')
               .portfolio-box-caption
                 .portfolio-box-caption-content
                   .project-category.text-faded
-                    | Category
+                    | ClothApp
                   .project-name
-                    | Project Accessories
+                    | Accessories
           .col-lg-4.col-sm-6
             a.portfolio-box(href='#')
-              img.img-responsive(src='img/portfolio/3.jpg', alt='')
+              img.img-responsive(src='img/gallery/3.jpg', alt='')
               .portfolio-box-caption
                 .portfolio-box-caption-content
                   .project-category.text-faded
-                    | Category
+                    | ClothApp
                   .project-name
-                    | Project Shoes
+                    | Shoes
           .col-lg-4.col-sm-6
             a.portfolio-box(href='#')
-              img.img-responsive(src='img/portfolio/4.jpg', alt='')
+              img.img-responsive(src='img/gallery/4.jpg', alt='')
               .portfolio-box-caption
                 .portfolio-box-caption-content
                   .project-category.text-faded
-                    | Category
+                    | ClothApp
                   .project-name
-                    | Project Favorite Shops
+                    | Favorite Shops
           .col-lg-4.col-sm-6
             a.portfolio-box(href='#')
-              img.img-responsive(src='img/portfolio/5.jpg', alt='')
+              img.img-responsive(src='img/gallery/5.jpg', alt='')
               .portfolio-box-caption
                 .portfolio-box-caption-content
                   .project-category.text-faded
-                    | Category
+                    | ClothApp
                   .project-name
-                    | Project Favorite Brands
+                    | Favorite Brands
           .col-lg-4.col-sm-6
             a.portfolio-box(href='#')
-              img.img-responsive(src='img/portfolio/6.jpg', alt='')
+              img.img-responsive(src='img/gallery/6.jpg', alt='')
               .portfolio-box-caption
                 .portfolio-box-caption-content
                   .project-category.text-faded
-                    | Category
+                    | ClothApp
                   .project-name
-                    | Project Get Inspired
+                    | Get Inspired
     aside.bg-dark
       .container.text-center
         .call-to-action
@@ -164,7 +157,7 @@ html(lang='en')
           .col-lg-8.col-lg-offset-2.text-center
             i.fa.fa-envelope-square.fa-4x.wow.bounceIn(data-wow-delay='.1s')
             p
-              a(href='mailto:your-email@your-domain.com') Click here to mail us!
+              a(href='mailto:clothapp.project@gmail.com') Click here to mail us!
     // jQuery
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js')
     // Bootstrap Core JavaScript
