@@ -5,6 +5,9 @@ app = express();
 // Route requests to /users
 require('cloud/routes/users.js')(app);
 
+// Route requests to a test web client
+require('cloud/routes/test.js')(app);
+
 // Global app configuration section
 app.set('views', 'cloud/views');  // Specify the folder to find templates
 app.set('view engine', 'jade');    // Set the template engine
