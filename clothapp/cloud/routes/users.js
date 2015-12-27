@@ -6,7 +6,8 @@ module.exports = function (app) {
 		res.send("Welcome to /users.");
 	});
     
-    //crea nuovo profilo
+    // Request: POST '/users/signup'
+    // Result: Create a new user with the given username, password, email.
     app.post('/users/signup', function (req, res) {
         var user = new Parse.User();
         user.set("username", req.body.username);
@@ -26,8 +27,8 @@ module.exports = function (app) {
         });
     });
 
-
-    //login al profilo
+    // Request: POST '/users/login'
+    // Result: Log in a user with the given username and password.
     app.post('/users/login', function (req, res) {
         Parse.User.logIn(req.body.username, req.body.password, {
             success: function (user) {
@@ -41,7 +42,8 @@ module.exports = function (app) {
         });
     });
 
-    //richiedi un profilo
+    // Request: GET '/users/:username'
+    // Result: Get the user profile of the user with the given username.
     app.get('/users/:username', function (req, res) {
         var query = new Parse.Query(Parse.User);
         query.equalTo("username", req.params.username);
