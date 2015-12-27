@@ -1,29 +1,57 @@
-module.exports = function(app) {
+module.exports = function (app) {
 
 	// Request:	GET '/users'
 	// Result: Test message.
-	app.get('/users', function(req, res) {
+	app.get('/users', function (req, res) {
 		res.send("Welcome to /users.");
 	});
-	
-	// Request: GET 'users/create'
-	// Params: ND
-	// Result: Creates a new user profile.
-	app.post('/users/create', function (req, res) {
-		//da implementare 
-	});
+    
+    //crea nuovo profilo
+    app.post('/users/signup', function (req, res) {
+        var user = new Parse.User();
+        user.set("username", req.body.username);
+        user.set("password", req.body.password);
+        user.set("email", req.body.email);
 
-	//richiedi un profilo
-	app.get('/profile/:name', function (req, res) {
-		var query=new Parse.Query("utenti");
-		query.equalTo("name",req.params.nome);
-		query.find({
-		success: function(results) {      
-		  res.send(results);
-		},
-		error: function() {
-		  res.send("failed");
-		}
-	  });
-	});
-}
+        user.signUp(null, {
+            success: function (user) {
+                // Hooray! Let them use the app now.
+                res.send('sigup success');
+            },
+            error: function (user, error) {
+                // Show the error message somewhere and let the user try again.
+                // alert("Error: " + error.code + " " + error.message);
+                res.send('error');
+            }
+        });
+    });
+
+
+    //login al profilo
+    app.post('/users/login', function (req, res) {
+        Parse.User.logIn(req.body.username, req.body.password, {
+            success: function (user) {
+                //fare cose dopo il login di successo.
+                res.send('signin success');
+            },
+            error: function (user, error) {
+                // Accesso non riuscito. Controllare l'errore per capire perché.
+                res.send('error');
+            }
+        });
+    });
+
+    //richiedi un profilo
+    app.get('/users/:username', function (req, res) {
+        var query = new Parse.Query(Parse.User);
+        query.equalTo("username", req.params.username);
+        query.find({
+            success: function (results) {
+                res.send(results);
+            },
+            error: function () {
+                res.send("failed");
+            }
+        });
+    });
+};
