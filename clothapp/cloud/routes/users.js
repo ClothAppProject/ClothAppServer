@@ -6,6 +6,7 @@ module.exports = function (app) {
 		res.send("Welcome to /users.");
 	});
     
+    /*
     // Request: POST '/users/signup'
     // Result: Create a new user with the given username, password, email.
     app.post('/users/signup', function (req, res) {
@@ -41,6 +42,7 @@ module.exports = function (app) {
             }
         });
     });
+    */
 
     // Request: GET '/users/:username'
     // Result: Get the user profile of the user with the given username.
@@ -55,5 +57,54 @@ module.exports = function (app) {
                 res.send("failed");
             }
         });
+    });
+    
+    // Request: GET '/users/:username/profilePhoto'
+    // Result: Get the user profile photo of the user with the given username.
+    app.get('/users/:username/profilePhoto', function (req, res) {
+        // Da implementare...
+        res.send('Profile Photo: Da implementare...');
+    });
+    
+    // Request: GET '/users/:username/profileThumbnail'
+    // Result: Get the user profile thumbnail of the user with the given username.
+    app.get('/users/:username/profileThumbnail', function (req, res) {
+        // Da implementare...
+        res.send('Profile Thumbnail: Da implementare...');
+    });
+    
+    // Request: GET '/users/:username/gallery'
+    // Result: Get the gallery of the user with the given username.
+    app.get('/users/:username/gallery', function (req, res) {
+        // Da implementare...
+        res.send('User Gallery: Da implementare...');
+    });
+    
+    // Request: GET '/users/:username/followers'
+    // Result: Get the users who follow the user with the given username.
+    app.get('/users/:username/followers', function (req, res) {
+        // Da implementare...
+        res.send('User Followers: Da implementare...');
+    });
+    
+    // Request: GET '/users/:username/following'
+    // Result: Get the followed users of the user with the given username.
+    app.get('/users/:username/following', function (req, res) {
+        // Da implementare...
+        res.send('Following Users: Da implementare...');
+    });
+    
+    // Request: GET '/users/:username/shops'
+    // Result: Get the favorite shops of the user with the given username.
+    app.get('/users/:username/shops', function (req, res) {
+        // Da implementare...
+        res.send('Favorite Shops: Da implementare...');
+    });
+    
+    // Request: GET '/users/:username/brands'
+    // Result: Get the favorite brands of the user with the given username.
+    app.get('/users/:username/brands', function (req, res) {
+        // Da implementare...
+        res.send('Favorite Brands: Da implementare...');
     });
 };
