@@ -1,0 +1,50 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        title ClothApp - Set User Profile Data
+        // jQuery
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+        // Bootstrap Core CSS
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', type='text/css')
+        // Bootstrap Core JavaScript
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+        // Parse
+        script(src='//www.parsecdn.com/js/parse-1.6.12.min.js')
+        // Custom scripts
+        script(src='/js/webclient/setuserdata.js')
+    body
+        .container
+            h2.text-center Set User Profile Data
+            br
+            .row
+                .col-sm-6.col-sm-offset-3
+                    form.form-horizontal(name='updForm', role='form', method='get', onsubmit='return OnSubmitUserProfileData();')
+                        .form-group
+                            label.control-label.col-sm-2 Username:
+                            .col-sm-10
+                                input.form-control(name='username', placeholder='Enter username')
+                        .form-group
+                            label.control-label.col-sm-2 Email:
+                            .col-sm-10
+                                input.form-control(name='email', placeholder='Enter email')
+                        .form-group
+                            label.control-label.col-sm-2 First Name:
+                            .col-sm-10
+                                input.form-control(name='firstName', placeholder='Enter first name')
+                        .form-group
+                            label.control-label.col-sm-2 Last Name:
+                            .col-sm-10
+                                input.form-control(name='lastName', placeholder='Enter last name')
+                        .form-group
+                            label.control-label.col-sm-2 Birthday:
+                            .col-sm-10
+                                input.form-control(name='date', type='date', placeholder='Enter birthday')
+                        .form-group
+                            .col-sm-offset-2.col-sm-10
+                                button.btn.btn-default(type='submit') Update Data
+                br
+                hr
+            a(href='/webclient').text-center Home
