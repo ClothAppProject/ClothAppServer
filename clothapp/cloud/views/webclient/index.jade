@@ -25,30 +25,45 @@ html(lang='en')
             hr
             br
             h3 Welcome to the ClothApp Web Client!
-            p Click on one of the following links.
             p#userInfo You are not logged in.
-            ul
-                li 
-                    button.btn.btn-default 
-                        a(href='http://clothapp.parseapp.com/webclient/signup') Sign up
-                li 
-                    button.btn.btn-default
-                        a(href='http://clothapp.parseapp.com/webclient/signin') Sign in
-                li 
-                    button.btn.btn-default
-                        a(href='http://clothapp.parseapp.com/webclient/signout') Sign out
-                li 
-                    button.btn.btn-default
-                        a(href='http://clothapp.parseapp.com/webclient/getuserdata') Get user profile data
-                li 
-                    button.btn.btn-default
-                        a(href='http://clothapp.parseapp.com/webclient/setuserdata') Set user data
-                li
-                    button.btn.btn-default
-                        a(href='http://clothapp.parseapp.com/webclient/uploadphoto') Upload a photo
-                li
-                    button.btn.btn-default
-                        a(href='http://clothapp.parseapp.com/webclient/getusergallery') Get user gallery
+            .row
+                .col-sm-3
+                    p Click on one of the following links.
+                    .row
+                        .col-sm-12
+                            button.btn.btn-default.btn-block
+                                a(href='http://clothapp.parseapp.com/webclient/signup') Sign up
+                            br
+                    .row
+                        .col-sm-12
+                            button.btn.btn-default.btn-block
+                                a(href='http://clothapp.parseapp.com/webclient/signin') Sign in
+                            br
+                    .row
+                        .col-sm-12
+                            button.btn.btn-default.btn-block
+                                a(href='http://clothapp.parseapp.com/webclient/signout') Sign out
+                            br
+                    .row
+                        .col-sm-12
+                            button.btn.btn-default.btn-block
+                                a(href='http://clothapp.parseapp.com/webclient/getuserdata') Get user profile data
+                            br
+                    .row
+                        .col-sm-12
+                            button.btn.btn-default.btn-block
+                                a(href='http://clothapp.parseapp.com/webclient/setuserdata') Set user data
+                            br
+                    .row
+                        .col-sm-12
+                            button.btn.btn-default.btn-block
+                                a(href='http://clothapp.parseapp.com/webclient/uploadphoto') Upload a photo
+                            br
+                    .row
+                        .col-sm-12
+                            button.btn.btn-default.btn-block
+                                a(href='http://clothapp.parseapp.com/webclient/getusergallery') Get user gallery
+                            br
             br
             hr
             script checkLogin();
