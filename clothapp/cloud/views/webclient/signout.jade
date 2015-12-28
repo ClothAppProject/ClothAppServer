@@ -1,0 +1,31 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        title ClothApp - Sign in
+        // Bootstrap Core CSS
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', type='text/css')
+        // Bootstrap Core JavaScript
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+        // jQuery
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+        // Parse
+        script(src='//www.parsecdn.com/js/parse-1.6.12.min.js')
+        // Custom scripts
+        script(src='/js/webclient/signout.js')
+    body
+        .container
+            hr
+            h2.text-center Sign Out
+            br
+            .row
+                .col-sm-6.col-sm-offset-3
+                    form.form-horizontal(name='signOutForm', role='form', method='get', onsubmit='return OnLogout();')
+                        .form-group
+                            .col-sm-offset-4.col-sm-4
+                                button.btn.btn-default(type='submit') Sign Out
+            br
+            hr
+            a(href='/webclient').text-center Home

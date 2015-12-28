@@ -1,0 +1,55 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        title ClothApp Web Client
+        // jQuery
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+        // Bootstrap Core CSS
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', type='text/css')
+        // Bootstrap Core JavaScript
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+        // Parse
+        script(src='//www.parsecdn.com/js/parse-1.6.12.min.js')
+        // Custom scripts
+        script(src='/js/webclient/index.js')
+    body
+        .container-fluid
+            .jumbotron
+                h1 ClothApp Web Client
+                p This is a test web client for ClothApp
+            br
+        .container
+            hr
+            br
+            h3 Welcome to the ClothApp Web Client!
+            p Click on one of the following links.
+            p#userInfo You are not logged in.
+            ul
+                li 
+                    button.btn.btn-default 
+                        a(href='http://clothapp.parseapp.com/webclient/signup') Sign up
+                li 
+                    button.btn.btn-default
+                        a(href='http://clothapp.parseapp.com/webclient/signin') Log in
+                li 
+                    button.btn.btn-default
+                        a(href='http://clothapp.parseapp.com/webclient/signout') Log out
+                li 
+                    button.btn.btn-default
+                        a(href='http://clothapp.parseapp.com/webclient/getuserdata') Get user profile data
+                li 
+                    button.btn.btn-default
+                        a(href='http://clothapp.parseapp.com/webclient/setuserdata') Set user data
+                li
+                    button.btn.btn-default
+                        a(href='http://clothapp.parseapp.com/webclient/uploadphoto') Upload a photo
+                li
+                    button.btn.btn-default
+                        a(href='http://clothapp.parseapp.com/webclient/getusergallery') Get user gallery
+            br
+            hr
+            script checkLogin();
+            

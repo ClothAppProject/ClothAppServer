@@ -11,7 +11,7 @@ app.use(express.bodyParser());    // Middleware for reading request body
 require('cloud/routes/users.js')(app);
 
 // Route requests to a test web client
-require('cloud/routes/test.js')(app);
+require('cloud/routes/webclient.js')(app);
 
 // This is an example of hooking up a request handler with a specific request
 // path and HTTP verb using the Express routing API.

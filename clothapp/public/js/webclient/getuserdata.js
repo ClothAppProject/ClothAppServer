@@ -1,3 +1,11 @@
+// Parse initialization
+try {
+    Parse.initialize("JdgT5RtwJaaoDRNe9bx5LF3TyVj20RGXMKMv6jQ8", "MttzOIoQIxkHFd6IuCrsk8AG4FeUy0jTP741gtIg");
+} catch (err) {
+    alert(err.message);
+}
+
+// Get user profile data for the user with the given username
 function OnSubmitUserProfileData() {
     var username = document.updForm.username.value;
     
