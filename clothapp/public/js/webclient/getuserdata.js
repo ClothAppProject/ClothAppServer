@@ -14,7 +14,7 @@ function OnSubmitUserProfileData() {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
             var user = JSON.parse(xhttp.responseText)[0];
-            alert(xhttp.responseText);
+            // alert(xhttp.responseText);
             document.getElementById("updObjectID").setAttribute('placeholder', user.objectId);
             document.getElementById("updUsername").setAttribute('placeholder', user.username);
             document.getElementById("updEmail").setAttribute('placeholder', user.email);
