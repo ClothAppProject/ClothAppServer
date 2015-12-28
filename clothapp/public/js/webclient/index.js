@@ -13,5 +13,11 @@ function checkLogin() {
     if (currentUser) {
         var username = currentUser.get('username');
         document.getElementById('userInfo').innerHTML = 'You are currently logged in as ' + username;
+    } else {
+        var setUserDataBtn = document.getElementById('setUserDataBtn');
+        var uploadPhotoBtn = document.getElementById('uploadPhotoBtn');
+        
+        setUserDataBtn.className = setUserDataBtn.className + ' disabled';
+        uploadPhotoBtn.className = uploadPhotoBtn.className + ' disabled';
     }
 }

@@ -12,47 +12,11 @@ module.exports = function (app) {
 		res.render('webclient/signup');
 	});
     
-    // Request: POST '/webclient/signup'
-    // Result: Create a new user with the given username, password, email.
-    /*app.post('/webclient/signup', function (req, res) {
-        var user = new Parse.User();
-        user.set('username', req.body.username);
-        user.set('password', req.body.password);
-        user.set('email', req.body.email);
-        user.set('name', req.body.firstName);
-        user.set('lastname', req.body.lastName);
-        user.set('date', req.body.date);
-
-        user.signUp(null, {
-            success: function (user) {
-                res.redirect('/webclient');
-            },
-            error: function (user, error) {
-                res.send(error);
-            }
-        });
-    });*/
-    
     // Request:	GET '/webclient/signin'
 	// Result: Render web client signin page.
 	app.get('/webclient/signin', function (req, res) {
 		res.render('webclient/signin');
 	});
-    
-    // Request: POST '/webclient/signin'
-    // Result: Log in the user with the given username and password.
-    /*app.post('/webclient/signin', function (req, res) {
-        Parse.User.logIn(req.body.username, req.body.password, {
-            success: function(user) {
-                var currentUser = Parse.User.current();
-                res.send(currentUser.get('username'));
-                // res.redirect('/webclient');
-            },
-            error: function(user, error) {
-                res.send(error.message);
-            }
-        });
-    });*/
     
     // Request:	GET '/webclient/getuserdata'
 	// Result: Render "get user profile data" page.
