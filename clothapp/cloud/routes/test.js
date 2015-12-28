@@ -10,9 +10,12 @@ module.exports = function (app) {
     // Result: Create a new user with the given username, password, email.
     app.post('/test/signup', function (req, res) {
         var user = new Parse.User();
-        user.set("username", req.body.username);
-        user.set("password", req.body.password);
-        user.set("email", req.body.email);
+        user.set('username', req.body.username);
+        user.set('password', req.body.password);
+        user.set('email', req.body.email);
+        user.set('name', req.body.firstName);
+        user.set('lastname', req.body.lastName);
+        user.set('date', req.body.date);
 
         user.signUp(null, {
             success: function (user) {
@@ -21,7 +24,7 @@ module.exports = function (app) {
             },
             error: function (user, error) {
                 // Show the error message somewhere and let the user try again.
-                alert("Error: " + error.code + " " + error.message);
+                // alert("Error: " + error.code + " " + error.message);
                 res.send(error);
             }
         });
