@@ -13,6 +13,10 @@ require('cloud/routes/users.js')(app);
 // Route requests to a test web client
 require('cloud/routes/webclient.js')(app);
 
+app.get('/reset_psw', function (req, res) {
+	res.render('reset_psw');
+});
+
 // This is an example of hooking up a request handler with a specific request
 // path and HTTP verb using the Express routing API.
 app.get('/', function (req, res) {
