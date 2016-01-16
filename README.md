@@ -1,5 +1,3 @@
-<snippet>
-  <content><![CDATA[
 # ${1:Project Name}
 Hello! This is the ClothApp Server Repository
 ## Website
@@ -32,6 +30,3 @@ Prof. Panizzi Emanuele - for his precious suggestions and feedback.
    	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    	See the License for the specific language governing permissions and
    	limitations under the License.
-]]></content>
-  <tabTrigger>readme</tabTrigger>
-</snippet>
