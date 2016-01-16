@@ -42,7 +42,7 @@ Feel free to contact us: clothapp.project@gmail.com
 Prof. Panizzi Emanuele - for his precious suggestions and feedback.
 
 ## License
-	Copyright 1994 ClothAppProject
+	Copyright 2015-2016 ClothAppProject
 
    	Licensed under the Apache License, Version 2.0 (the "License");
    	you may not use this file except in compliance with the License.
