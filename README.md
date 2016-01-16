@@ -1,4 +1,4 @@
-# ${1:Project Name}
+# ClothApp Server
 Hello! This is the ClothApp Server Repository
 ## Website
 website
