@@ -1,13 +1,31 @@
 # ClothApp Server
-Hello! This is the ClothApp Server Repository
+Welcome! This is the ClothApp Server Repository.
+
+For the server side of our project we used the following techonologies:
+ - NodeJS: a JavaScript runtime built on Chrome's V8 JavaScript engine.
+ - Express: a web framework for NodeJS.
+ - Parse Cloud Code: an advanced hosting service. Provided by Parse.
+ - Parse Core: to easily store data on the cloud. Provided by Parse.
+ - Jade: an HTML template engine.
 ## Website
-website
+This repository cointains our website code. You can visit our website at
+	http://www.clothapp.it
 ## Web Client
-web client
+This repository also contains our web client code. You can try our web client at
+	http://www.clothapp.it/webclient
+
+NOTE: As of now, our web client is still a work in progress and provides basic functionalities only. We are hard at work to improve all the existing functionalities and add more and more new stuff.
 ## Web Server
-web server
+Last but not least, this repository also contains the code of our server. We are in the process of building and implementing a REST API interface to let everyone get access to our database.
 ## About us
-team
+Our team is composed by:
+ - Carlini Jacopo
+ - Ceribelli Giacomo
+ - Cometto Niccolò
+ - Conia Simone
+ - Dessì Roberto
+ 
+Feel free to contact us: clothapp.project@gmail.com
 ## Contributing
 1. Fork it!
 2. Create your feature branch: `git checkout -b my-new-feature`
