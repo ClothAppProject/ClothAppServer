@@ -22,6 +22,6 @@ app.get('/reset_psw', function (req, res) {
 app.get('/', function (req, res) {
     res.render('index');
 });
-
+//sto testando github
 // Attach the Express app to Cloud Code.
 app.listen();
