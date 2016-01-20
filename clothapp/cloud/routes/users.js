@@ -46,9 +46,11 @@ module.exports = function (app) {
 
     // Request: GET '/users/:username'
     // Result: Get the user profile of the user with the given username.
-    app.get('/users/:username', function (req, res) {
+    app.get("/users/:username", function (req, res) {
         var query = new Parse.Query(Parse.User);
-        query.equalTo("username", req.params.username);
+        var name=req.params.username.substring(1);
+        
+        query.equalTo("username",""+name);
         query.find({
             success: function (results) {
                 res.send(results);

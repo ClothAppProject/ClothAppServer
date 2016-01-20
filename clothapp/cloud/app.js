@@ -13,10 +13,6 @@ require('cloud/routes/users.js')(app);
 // Route requests to a test web client
 require('cloud/routes/webclient.js')(app);
 
-//app.get('/user:id',function(req,res)){
-	//var query=new Parse.Query(Users);
-    //var result=query.equalTo(objectId,req.id);	
-//	res.send(req.id);}
 app.get('/reset_psw', function (req, res) {
 	res.render('reset_psw'); 
 });
