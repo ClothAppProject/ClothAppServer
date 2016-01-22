@@ -37,7 +37,7 @@ module.exports = function (app) {
                 res.send('signin success');
             },
             error: function (user, error) {
-                // Accesso non riuscito. Controllare l'errore per capire perché.
+                // Accesso non riuscito. Controllare l'errore per capire perchè.
                 res.send('error');
             }
         });
@@ -94,7 +94,8 @@ module.exports = function (app) {
         query.find({
             success: function (results) {
                 //TODO: informare il client se user non esiste o no foto
-                res.send(results);
+                if(results.lenght=== 0) res.send('no Foto');
+                else res.send(results);
             },
             error: function () {
                 res.send("failed");
