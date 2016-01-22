@@ -5,10 +5,11 @@ try {
     alert(err.message);
 }
 
-// Sign in function
+// Sign out function
 function OnLogout() {
     try {
         Parse.User.logOut();
+        window.location.replace("http://clothapp.parseapp.com/webclient");
     } catch (err) {
         alert(err.message);
     }
