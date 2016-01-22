@@ -13,14 +13,17 @@ function OnSubmitUserProfileData() {
     
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
+            
             var user = JSON.parse(xhttp.responseText)[0];
-            // alert(xhttp.responseText);
-            document.getElementById("updObjectID").setAttribute('placeholder', user.objectId);
-            document.getElementById("updUsername").setAttribute('placeholder', user.username);
-            document.getElementById("updEmail").setAttribute('placeholder', user.email);
-            document.getElementById("updFirstName").setAttribute('placeholder', user.name);
-            document.getElementById("updLastName").setAttribute('placeholder', user.lastname);
-            document.getElementById("updBirthday").setAttribute('placeholder', Date(user.date.iso));
+            
+            alert(xhttp.responseText);
+            
+            document.getElementById("updObjectID").setAttribute('value', user.objectId);
+            document.getElementById("updUsername").setAttribute('value', user.username);
+            document.getElementById("updEmail").setAttribute('value', user.email);
+            document.getElementById("updFirstName").setAttribute('value', user.name);
+            document.getElementById("updLastName").setAttribute('value', user.lastname);
+            document.getElementById("updBirthday").setAttribute('value', Date(user.date.iso));
         }
     };
     
