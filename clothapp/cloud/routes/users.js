@@ -51,7 +51,7 @@ module.exports = function (app) {
         query.equalTo("username", req.params.username);
         query.find({
             success: function (results) {
-                //TODO: aggiungere le informazioni a seconda se user � una persona, negozio o negozioOnline
+                //TODO: aggiungere le informazioni a seconda se user è una persona, negozio o negozioOnline
                 res.send(results);
             },
             error: function () {
@@ -68,7 +68,7 @@ module.exports = function (app) {
         query.equalTo("username", req.params.username);
         query.find({
             success: function (results) {
-                //TODO: informare il client se la foto non � presente o l'utente non esiste
+                //TODO: informare il client se la foto non è presente o l'utente non esiste
                 var utente= results;
                 res.send(utente.get("fotoProfilo"));
             },
