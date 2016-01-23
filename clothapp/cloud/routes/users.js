@@ -51,25 +51,49 @@ module.exports = function (app) {
         var name = req.params.username;
         
         console.log("NAME: " + name);
-        
         query.equalTo("username", name);
         query.find({
-            success: function (results) {
-                res.send(results);
-            },
-            error: function () {
-                res.send("failed");
-            }
-        });
+        success: function (results) {
+        // Use 'get' to obtain the value of an attribute.;
+       res.send(results);
+       },
+  error: function () {
+    res.send("failed");
+  }
+});
+            
+        
     });
     
     // Request: GET '/users/:username/profilePhoto'
     // Result: Get the user profile photo of the user with the given username.
     app.get('/users/:username/profilePhoto', function (req, res) {
-        // Da implementare...
-        res.send('Profile Photo: Da implementare...');
+        var query = new Parse.Query(Parse.User);
+        var name = req.params.username;
+        
+        console.log("NAME: " + name);
+        query.equalTo("username", name);
+        query.find({
+        success: function (results) {
+        // Use 'get' to obtain the value of an attribute.
+       var c=results[0].id;//cosi accedo all'id 
+       var query2=new Parse.Query(Parse.Photo);
+       query2.equalTo('username',name);
+       query2.find({
+		 success: function(results2){
+			 res.send(results2[0].get('photo'));//cosi accedo ad un campo specifico diverso dall'objectId
+		 },
+		 error:function(){
+			 res.send("errore nella restituzione delle foto")}
+		 });         
+  },
+  
+    error: function () {
+    res.send("failed");
+  }
+       
     });
-    
+    });
     // Request: GET '/users/:username/profileThumbnail'
     // Result: Get the user profile thumbnail of the user with the given username.
     app.get('/users/:username/profileThumbnail', function (req, res) {
