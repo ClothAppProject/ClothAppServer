@@ -106,7 +106,7 @@ module.exports = function (app) {
             var photo = Parse.Object.extend("Photo");
             var query = new Parse.Query(photo);
             query.equalTo("user", req.params.username);
-            query.descendig("numeroLike");
+            query.descending("numeroLike");
             query.find({
                 success: function (results) {
                     //TODO: informare il client se user non esiste o no foto
