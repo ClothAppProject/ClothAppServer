@@ -80,10 +80,10 @@ module.exports = function (app) {
      
     // Request: GET '/users/:username/profileThumbnail'
     // Result: Get the user profile thumbnail of the user with the given username.
-    app.get('/users/:username/profileThumbnail', function (req, res) {
+  //  app.get('/users/:username/profileThumbnail', function (req, res) {
         // Da implementare...
-        res.send('Profile Thumbnail: Da implementare...');
-    });
+    //    res.send('Profile Thumbnail: Da implementare...');
+   // });
      
     // Request: GET '/users/:username/gallery'
     // Result: Get the gallery of the user with the given username.
