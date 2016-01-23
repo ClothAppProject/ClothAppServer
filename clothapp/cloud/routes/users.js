@@ -174,7 +174,7 @@ module.exports = function (app) {
      
     // Request: GET '/users/:username/brands'
     // Result: Get the favorite brands of the user with the given username.
-    app.get('/users/:username/brands', function (req, res) {
+    //app.get('/users/:username/brands', function (req, res) {
        /* var query = new Parse.Query(Parse.User);
         query.equalTo("user", req.params.username);
         query.find({
@@ -187,5 +187,5 @@ module.exports = function (app) {
             }
         });
          res.send('Profile Thumbnail: Da implementare...'); */
-    });
+  //  });
 };
