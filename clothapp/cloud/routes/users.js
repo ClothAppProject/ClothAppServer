@@ -102,7 +102,22 @@ module.exports = function (app) {
             }
         });
     });
-     
+    app.get('/users/:username/gallerylike', function (req, res) {
+            var photo = Parse.Object.extend("Photo");
+            var query = new Parse.Query(photo);
+            query.equalTo("user", req.params.username);
+            query.descendig("numeroLike");
+            query.find({
+                success: function (results) {
+                    //TODO: informare il client se user non esiste o no foto
+                    if(results.lenght=== 0) res.send('no Foto');
+                    else res.send(results);
+                },
+                error: function () {
+                    res.send("failed");
+                }
+            });
+        });
     // Request: GET '/users/:username/followers'
     // Result: Get the users who follow the user with the given username.
     app.get('/users/:username/followers', function (req, res) {
