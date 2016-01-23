@@ -48,23 +48,6 @@ module.exports = function (app) {
     // Result: Get the user profile of the user with the given username.
     app.get('/users/:username', function (req, res) {
         var query = new Parse.Query(Parse.User);
-<<<<<<< HEAD
-        var name = req.params.username;
-        
-        console.log("NAME: " + name);
-        query.equalTo("username", name);
-        query.find({
-        success: function (results) {
-        // Use 'get' to obtain the value of an attribute.;
-       res.send(results);
-       },
-  error: function () {
-    res.send("failed");
-  }
-});
-            
-        
-=======
         query.equalTo("username", req.params.username);
         query.find({
             success: function (results) {
@@ -75,40 +58,11 @@ module.exports = function (app) {
                 res.send("failed");
             }
         });
->>>>>>> 806315bc8e8f95ac2729e09fa8572066609b6558
     });
      
     // Request: GET '/users/:username/profilePhoto'
     // Result: Get the user profile photo of the user with the given username.
     app.get('/users/:username/profilePhoto', function (req, res) {
-<<<<<<< HEAD
-        var query = new Parse.Query(Parse.User);
-        var name = req.params.username;
-        
-        console.log("NAME: " + name);
-        query.equalTo("username", name);
-        query.find({
-        success: function (results) {
-        // Use 'get' to obtain the value of an attribute.
-       var c=results[0].id;//cosi accedo all'id 
-       var query2=new Parse.Query(Parse.Photo);
-       query2.equalTo('username',name);
-       query2.find({
-		 success: function(results2){
-			 res.send(results2[0].get('photo'));//cosi accedo ad un campo specifico diverso dall'objectId
-		 },
-		 error:function(){
-			 res.send("errore nella restituzione delle foto")}
-		 });         
-  },
-  
-    error: function () {
-    res.send("failed");
-  }
-       
-    });
-    });
-=======
         var userphoto = Parse.Object.extend("UserPhoto");
         var query = new Parse.Query(userphoto);
         query.equalTo("username", req.params.username);
@@ -124,7 +78,6 @@ module.exports = function (app) {
         });
     });
      
->>>>>>> 806315bc8e8f95ac2729e09fa8572066609b6558
     // Request: GET '/users/:username/profileThumbnail'
     // Result: Get the user profile thumbnail of the user with the given username.
     app.get('/users/:username/profileThumbnail', function (req, res) {
