@@ -127,6 +127,7 @@ module.exports = function (app) {
             success: function (results) {
                 //TODO: informare il client se user non esiste o se array vuoto
                 var utente= results;
+                console.log(utente);
                 res.send(utente.get('follower'));
             },
             error: function () {
@@ -162,7 +163,9 @@ module.exports = function (app) {
             success: function (results) {
                 //TODO: informare client se user non esiste o se array vuoto
                 var utente= results;
-                res.send(utente.get('preferiti'));
+                var shops=utente.get('preferiti');
+                shops=shops.concat(utente.get('preferitiOnline'));
+                res.send(shops);
             },
             error: function () {
                 res.send("failed");
@@ -186,7 +189,42 @@ module.exports = function (app) {
             }
         });
     });
-     
+
+     // Request: GET '/users/:username/localshops'
+         // Result: Get the favorite localshops of the user with the given username.
+         app.get('/users/:username/localshops', function (req, res) {
+             var query = new Parse.Query(Parse.User);
+             query.equalTo("username", req.params.username);
+             query.find({
+                 success: function (results) {
+                     //TODO: informare client se user non esisteo se array vuoto
+                     var utente= results;
+                     res.send(utente.get('preferiti'));
+                 },
+                 error: function () {
+                     res.send("failed");
+                 }
+             });
+         });
+
+     // Request: GET '/users/:username/person'
+         // Result: Get the followed users of the user with the given username.
+         app.get('/users/:username/person', function (req, res) {
+             var persona = Parse.Object.extend("Persona")
+             var query = new Parse.Query(persona);
+             query.equalTo("username", req.params.username);
+             query.find({
+                 success: function (results) {
+                     //TODO: informare il client se user non esiste o se array vuoto
+                     var utente= results;
+                     res.send(utente);
+                 },
+                 error: function () {
+                     res.send("failed");
+                 }
+             });
+         });
+
     // Request: GET '/users/:username/brands'
     // Result: Get the favorite brands of the user with the given username.
     //app.get('/users/:username/brands', function (req, res) {
