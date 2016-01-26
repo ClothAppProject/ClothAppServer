@@ -239,7 +239,7 @@ module.exports = function (app) {
 
      // Request: GET '/users/:username/person'
      // Result: Get the person profile of the user (person) with the given username.
-     app.get('/users/:username/person', function (req, res) {
+     app.get('/users/person/:username', function (req, res) {
          var persona = Parse.Object.extend("Persona")
          var query = new Parse.Query(persona);
          query.equalTo("username", req.params.username);
@@ -259,7 +259,7 @@ module.exports = function (app) {
 
      // Request: GET '/users/:username/plocalshop'
      // Result: Get the person profile of the user (person) with the given username.
-     app.get('/users/:username/localshop', function (req, res) {
+     app.get('users/localshop/:username', function (req, res) {
          var local = Parse.Object.extend("LocalShop")
          var query = new Parse.Query(local);
          query.equalTo("username", req.params.username);
@@ -280,7 +280,7 @@ module.exports = function (app) {
 
      // Request: GET '/users/:username/plocalshop'
      // Result: Get the person profile of the user (person) with the given username.
-     app.get('/users/:username/localshop', function (req, res) {
+     app.get('/users/virtualshop/:username', function (req, res) {
          var online = Parse.Object.extend("VirtualShop")
          var query = new Parse.Query(online);
          query.equalTo("username", req.params.username);
