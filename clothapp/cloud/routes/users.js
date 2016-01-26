@@ -164,7 +164,7 @@ module.exports = function (app) {
         query.find({
             success: function (results) {
             try{
-            console.log("DEBUG: "+results.length);
+            //console.log("DEBUG: "+results.length);
                 if(results.length=== 0) res.send("this username doesn't exist");
                 else{
                     var utente= results[0];
@@ -259,7 +259,7 @@ module.exports = function (app) {
 
      // Request: GET '/users/:username/plocalshop'
      // Result: Get the person profile of the user (person) with the given username.
-     app.get('users/localshop/:username', function (req, res) {
+     app.get('/users/localshop/:username', function (req, res) {
          var local = Parse.Object.extend("LocalShop")
          var query = new Parse.Query(local);
          query.equalTo("username", req.params.username);
