@@ -16,7 +16,7 @@ function OnSubmitUserProfileData() {
             
             var user = JSON.parse(xhttp.responseText)[0];
             
-            alert(xhttp.responseText);
+            // alert(xhttp.responseText);
             
             document.getElementById("updObjectID").setAttribute('value', user.objectId);
             document.getElementById("updUsername").setAttribute('value', user.username);
@@ -24,20 +24,25 @@ function OnSubmitUserProfileData() {
             document.getElementById("updFirstName").setAttribute('value', user.name);
             
             if (user.flagISA == "Persona") {
-                alert("Persona");
-                var xhttp = new XMLHttpRequest();
+                var xhttpPersona = new XMLHttpRequest();
                 
-                xhttp.onreadystatechange = function () {
-                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+                xhttpPersona.onreadystatechange = function () {
+                    if (xhttpPersona.readyState === 4 && xhttpPersona.status === 200) {
 
-                        var persona = JSON.parse(xhttp.responseText)[0];
+                        var person = JSON.parse(xhttpPersona.responseText)[0];
                         
-                        alert(xhttp.responseText);
+                        // alert(xhttpPersona.resposeText);
+                        
+                        var birthday = new Date(person.date.iso);
+                        
+                        document.getElementById("updLastName").setAttribute('value', person.lastname);
+                        document.getElementById("updBirthday").setAttribute('value', birthday);
+                        document.getElementById("updCity").setAttribute('value', person.city);
                     }
                 };
                 
-                xhttp.open("GET", "http://clothapp.parseapp.com/users/" + username, true);
-                xhttp.send();
+                xhttpPersona.open("GET", "http://clothapp.parseapp.com/users/" + username + "/person", true);
+                xhttpPersona.send();
             }
         }
     };
