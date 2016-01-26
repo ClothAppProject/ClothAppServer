@@ -32,9 +32,17 @@ html(lang='en')
                             .col-sm-10
                                 input.form-control(name='password', type='password', placeholder='Enter password', required)
                         .form-group
+                            label.control-label.col-sm-2(for='pwd') Repeat password:
+                            .col-sm-10
+                                input.form-control(name='passwordCheck', type='password', placeholder='Enter password', required)
+                        .form-group
                             label.control-label.col-sm-2 Email:
                             .col-sm-10
                                 input.form-control(name='email', type='email', placeholder='Enter email', required)
+                        .form-group
+                            label.control-label.col-sm-2 Repeat email:
+                            .col-sm-10
+                                input.form-control(name='emailCheck', type='email', placeholder='Enter email', required)
                         .form-group
                             label.control-label.col-sm-2 First Name:
                             .col-sm-10
@@ -47,6 +55,10 @@ html(lang='en')
                             label.control-label.col-sm-2 Birthday:
                             .col-sm-10
                                 input.form-control(name='date', type='date', required)
+                        .form-group
+                            label.control-label.col-sm-2 City:
+                            .col-sm-10
+                                input.form-control(name='city', type='text', required)
                         .form-group
                             .col-sm-offset-2.col-sm-10
                                 button.btn.btn-default(type='submit') Sign Up
