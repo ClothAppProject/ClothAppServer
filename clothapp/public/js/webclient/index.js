@@ -14,13 +14,13 @@ function checkLogin() {
         var username = currentUser.get('username');
         document.getElementById('userInfo').innerHTML = 'You are currently logged in as ' + username;
     } else {
-        var setUserDataBtn = document.getElementById('setUserDataBtn');
-        var uploadPhotoBtn = document.getElementById('uploadPhotoBtn');
-        var getUserGallery = document.getElementById('getUserGallery');
+        // alert("Not logged in...");
         
-        setUserDataBtn.className = setUserDataBtn.className + ' disabled';
-        uploadPhotoBtn.className = uploadPhotoBtn.className + ' disabled';
-        getUserGallery.className = getUserGallery.className + ' disabled';
+        $("#setUserDataBtn,#uploadPhotoBtn,#getUserGallery").each(function(){
+            $(this).click(function(e) {
+                e.preventDefault();
+            });
+        });
         
     }
 }
