@@ -164,19 +164,22 @@ module.exports = function (app) {
         query.find({
             success: function (results) {
             try{
+            console.log("DEBUG: "+results.length);
                 if(results.length=== 0) res.send("this username doesn't exist");
-                var utente= results[0];
-                var local=utente.get('preferiti');
-                var online=utente.get('preferitiOnline')
-                if(typeof local=='undefined'){
-                    if(typeof online=='undefined') res.send("undefined");
-                    else{ res.send(online);}
-                }
-                else{if(typeof online=='undefined') res.send(local);
-                     else{
-                        var shops=local.concat(online);
-                        res.send(shops);
-                     }
+                else{
+                    var utente= results[0];
+                    var local=utente.get('preferiti');
+                    var online=utente.get('preferitiOnline')
+                    if(typeof local=='undefined'){
+                        if(typeof online=='undefined') res.send("undefined");
+                        else{ res.send(online);}
+                    }
+                    else{if(typeof online=='undefined') res.send(local);
+                         else{
+                            var shops=local.concat(online);
+                            res.send(shops);
+                         }
+                    }
                 }
             }catch(err){res.send("error:"+err.message);}
             },
@@ -195,10 +198,13 @@ module.exports = function (app) {
         query.find({
             success: function (results) {
                 try{
-                    var utente= results[0];
-                    var online=utente.get('preferitiOnline');
-                    if(typeof online=='undefined') res.send("undefined");
-                    else res.send(online);
+                    if(results.length=== 0) res.send("this person doesn't exist");
+                    else{
+                        var utente= results[0];
+                        var online=utente.get('preferitiOnline');
+                        if(typeof online=='undefined') res.send("undefined");
+                        else res.send(online);
+                    }
                 }catch(err){res.send("error: "+err.message)}
             },
             error: function () {
@@ -216,10 +222,13 @@ module.exports = function (app) {
          query.find({
               success: function (results) {
                  try{
-                     var utente= results[0];
-                     var local=utente.get('preferiti');
-                     if(typeof local=='undefined') res.send("undefined");
-                     else res.send(local);
+                    if(results.length=== 0) res.send("this person doesn't exist");
+                    else{
+                        var utente= results[0];
+                        var local=utente.get('preferiti');
+                        if(typeof local=='undefined') res.send("undefined");
+                        else res.send(local);
+                    }
                  }catch(err){res.send("error: "+err.message)}
               },
               error: function () {
