@@ -75,34 +75,6 @@ function OnSetData() {
             }
         });
         
-        
-
-        /*if (username != '') {
-            user.set('username', username);
-        }
-        if (email != '') {
-            user.set('email', email);
-        }
-        if (name != '') {
-            user.set('name', name);
-        }
-        if (lastname != '') {
-            user.set('lastname', lastname);
-        }
-        if (date != '') {
-            user.set('date', date);
-        }
-
-        user.save(null, {
-            success: function (user) {
-                // alert('Save success!');
-                window.location.replace('/webclient');
-            },
-            error: function (error) {
-                // alert('Save failed...');
-                window.location.replace('/webclient');
-            }
-        });*/
     } catch (err) {
         alert(err.message);
     }
