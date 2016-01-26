@@ -22,8 +22,23 @@ function OnSubmitUserProfileData() {
             document.getElementById("updUsername").setAttribute('value', user.username);
             document.getElementById("updEmail").setAttribute('value', user.email);
             document.getElementById("updFirstName").setAttribute('value', user.name);
-            document.getElementById("updLastName").setAttribute('value', user.lastname);
-            document.getElementById("updBirthday").setAttribute('value', Date(user.date.iso));
+            
+            if (user.flagISA == "Persona") {
+                alert("Persona");
+                var xhttp = new XMLHttpRequest();
+                
+                xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState === 4 && xhttp.status === 200) {
+
+                        var persona = JSON.parse(xhttp.responseText)[0];
+                        
+                        alert(xhttp.responseText);
+                    }
+                };
+                
+                xhttp.open("GET", "http://clothapp.parseapp.com/users/" + username, true);
+                xhttp.send();
+            }
         }
     };
     
