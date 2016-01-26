@@ -286,7 +286,7 @@ module.exports = function (app) {
          query.equalTo("username", req.params.username);
          query.find({
              success: function (results) {
-                 if(results.length=== 0) res.send("this localshop doesn't exist");
+                 if(results.length=== 0) res.send("this virtualshop doesn't exist");
                  else{
                     var utente=results[0];
                     res.send(utente);
