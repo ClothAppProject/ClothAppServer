@@ -21,6 +21,5 @@ function checkLogin() {
                 e.preventDefault();
             });
         });
-        
     }
 }
