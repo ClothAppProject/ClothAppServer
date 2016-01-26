@@ -38,30 +38,7 @@ module.exports = function (app) {
     
     // Request: POST '/webclient/upload'
     // Result: Upload a new photo for the user with the given username.
-    app.post('/webclient/upload', function (req, res) {
-        res.send('Uploading...');
-    });
-    
-    // Request: POST '/webclient/upload'
-    // Result: Upload a new photo for the user with the given username.
-    app.post('/webclient/update', function (req, res) {
-        var query = new Parse.Query(Parse.User);
-        query.equalTo('username', req.body.username);
-        
-        query.find().then(function (results) {
-            console.log('Query success');
-            return results[0].save({name: 'nome01'});
-            
-        }).then(function (obj) {
-            console.log('Save success');
-            res.send('success');
-            
-        }, function (error) {
-            console.log('Save fail');
-            console.log(error.code);
-            console.log(error.message);
-            res.send('error');
-            
-        })
+    app.get('/webclient/upload', function (req, res) {
+        res.render('webclient/upload');
     });
 };
