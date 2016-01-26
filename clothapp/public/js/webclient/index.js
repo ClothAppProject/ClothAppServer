@@ -16,8 +16,11 @@ function checkLogin() {
     } else {
         var setUserDataBtn = document.getElementById('setUserDataBtn');
         var uploadPhotoBtn = document.getElementById('uploadPhotoBtn');
+        var getUserGallery = document.getElementById('getUserGallery');
         
         setUserDataBtn.className = setUserDataBtn.className + ' disabled';
         uploadPhotoBtn.className = uploadPhotoBtn.className + ' disabled';
+        getUserGallery.className = getUserGallery.className + ' disabled';
+        
     }
 }
