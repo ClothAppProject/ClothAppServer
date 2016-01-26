@@ -131,7 +131,8 @@ module.exports = function (app) {
             }
         });
     });
-     
+
+
     // Request: GET '/users/:username/shops'
     // Result: Get the favorite shops of the user with the given username.
     app.get('/users/:username/shops', function (req, res) {
