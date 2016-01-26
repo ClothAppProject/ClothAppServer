@@ -15,15 +15,37 @@ module.exports = function (app) {
         query.equalTo("username", req.params.username);
         query.find({
             success: function (results) {
+            try{
                 //TODO: aggiungere le informazioni a seconda se user è una persona, negozio o negozioOnline
+                if(results.length===0) res.send("this username doesn't exist");
                 res.send(results);
+            }catch(err){res.send("error: "+err.message)}
             },
             error: function () {
                 res.send("failed");
             }
         });
     });
-     
+
+     // Request: GET '/users/:name'
+     // Result: Get the user profiles of the user with the given name.
+     app.get('/users/:name', function (req, res) {
+          var query = new Parse.Query(Parse.User);
+          query.equalTo("name", req.params.name);
+          query.find({
+              success: function (results) {
+              try{
+                  //TODO: aggiungere le informazioni a seconda se user è una persona, negozio o negozioOnline
+                  if(results.length===0) res.send("this name doesn't exist");
+                  res.send(results);
+              }catch(err){res.send("error: "+err.message)}
+              },
+              error: function () {
+                  res.send("failed");
+              }
+          });
+     });
+
     // Request: GET '/users/:username/profilePhoto'
     // Result: Get the user profile photo of the user with the given username.
     app.get('/users/:username/profilePhoto', function (req, res) {
@@ -97,7 +119,7 @@ module.exports = function (app) {
                     else{
                         var utente= results[0];
                         var followers=utente.get('followers');
-                        console.log("DEBUG "+utente.get('followers'));
+                        //console.log("DEBUG "+utente.get('followers'));
                         if(typeof followers=='undefined') res.send('undefined');
                         else res.send(utente.get('followers'));
                     }
@@ -134,18 +156,29 @@ module.exports = function (app) {
 
 
     // Request: GET '/users/:username/shops'
-    // Result: Get the favorite shops of the user with the given username.
+    // Result: Get the favorite shops of the user (person) with the given username.
     app.get('/users/:username/shops', function (req, res) {
-        var query = new Parse.Query(Parse.User);
+        var persona = Parse.Object.extend("Persona");
+        var query = new Parse.Query(persona);
         query.equalTo("username", req.params.username);
         query.find({
             success: function (results) {
-                //TODO: informare client se user non esiste o se array vuoto
+            try{
+                if(results.length=== 0) res.send("this username doesn't exist");
                 var utente= results[0];
                 var local=utente.get('preferiti');
                 var online=utente.get('preferitiOnline')
-                var shops=local.concat(online);
-                res.send(shops);
+                if(typeof local=='undefined'){
+                    if(typeof online=='undefined') res.send("undefined");
+                    else{ res.send(online);}
+                }
+                else{if(typeof online=='undefined') res.send(local);
+                     else{
+                        var shops=local.concat(online);
+                        res.send(shops);
+                     }
+                }
+            }catch(err){res.send("error:"+err.message);}
             },
             error: function () {
                 res.send("failed");
@@ -156,13 +189,17 @@ module.exports = function (app) {
     // Request: GET '/users/:username/shops'
     // Result: Get the favorite virtualshops of the user with the given username.
     app.get('/users/:username/virtualshops', function (req, res) {
-        var query = new Parse.Query(Parse.User);
+        var persona = Parse.Object.extend("Persona");
+        var query = new Parse.Query(persona);
         query.equalTo("username", req.params.username);
         query.find({
             success: function (results) {
-                //TODO: informare client se user non esisteo se array vuoto
-                var utente= results[0];
-                res.send(utente.get('preferitiOnline'));
+                try{
+                    var utente= results[0];
+                    var online=utente.get('preferitiOnline');
+                    if(typeof online=='undefined') res.send("undefined");
+                    else res.send(online);
+                }catch(err){res.send("error: "+err.message)}
             },
             error: function () {
                 res.send("failed");
@@ -170,44 +207,87 @@ module.exports = function (app) {
         });
     });
 
-     // Request: GET '/users/:username/localshops'
-         // Result: Get the favorite localshops of the user with the given username.
-         app.get('/users/:username/localshops', function (req, res) {
-             var query = new Parse.Query(Parse.User);
-             query.equalTo("username", req.params.username);
-             query.find({
-                 success: function (results) {
-                     //TODO: informare client se user non esisteo se array vuoto
+     // Request: GET '/users/:username/shops'
+     // Result: Get the favorite virtualshops of the user with the given username.
+     app.get('/users/:username/localshops', function (req, res) {
+         var persona = Parse.Object.extend("Persona");
+         var query = new Parse.Query(persona);
+         query.equalTo("username", req.params.username);
+         query.find({
+              success: function (results) {
+                 try{
                      var utente= results[0];
-                     try{
-                        console.log(utente.get('preferiti'));
-                        res.send(utente.get('preferiti'));
-                     }
-                     catch(err){res.send("error:"+err.message);}
-                 },
-                 error: function () {
-                     res.send("failed");
-                 }
-             });
+                     var local=utente.get('preferiti');
+                     if(typeof local=='undefined') res.send("undefined");
+                     else res.send(local);
+                 }catch(err){res.send("error: "+err.message)}
+              },
+              error: function () {
+                 res.send("failed");
+              }
          });
+     });
 
      // Request: GET '/users/:username/person'
-         // Result: Get the followed users of the user with the given username.
-         app.get('/users/:username/person', function (req, res) {
-             var persona = Parse.Object.extend("Persona")
-             var query = new Parse.Query(persona);
-             query.equalTo("username", req.params.username);
-             query.find({
-                 success: function (results) {
-                     //TODO: informare il client se user non esiste o se array vuoto
-                     var utente= results[0];
-                     res.send(utente);
-                 },
-                 error: function () {
-                     res.send("failed");
+     // Result: Get the person profile of the user (person) with the given username.
+     app.get('/users/:username/person', function (req, res) {
+         var persona = Parse.Object.extend("Persona")
+         var query = new Parse.Query(persona);
+         query.equalTo("username", req.params.username);
+         query.find({
+             success: function (results) {
+                 if(results.length=== 0) res.send("this person doesn't exist");
+                 else{
+                    var utente=results[0];
+                    res.send(utente);
                  }
-             });
+             },
+             error: function () {
+                 res.send("failed");
+             }
          });
+     });
+
+     // Request: GET '/users/:username/plocalshop'
+     // Result: Get the person profile of the user (person) with the given username.
+     app.get('/users/:username/localshop', function (req, res) {
+         var local = Parse.Object.extend("LocalShop")
+         var query = new Parse.Query(local);
+         query.equalTo("username", req.params.username);
+         query.find({
+             success: function (results) {
+                 if(results.length=== 0) res.send("this localshop doesn't exist");
+                 else{
+                    var utente=results[0];
+                    res.send(utente);
+                 }
+             },
+             error: function () {
+                 res.send("failed");
+             }
+         });
+     });
+
+
+     // Request: GET '/users/:username/plocalshop'
+     // Result: Get the person profile of the user (person) with the given username.
+     app.get('/users/:username/localshop', function (req, res) {
+         var online = Parse.Object.extend("VirtualShop")
+         var query = new Parse.Query(online);
+         query.equalTo("username", req.params.username);
+         query.find({
+             success: function (results) {
+                 if(results.length=== 0) res.send("this localshop doesn't exist");
+                 else{
+                    var utente=results[0];
+                    res.send(utente);
+                 }
+             },
+             error: function () {
+                 res.send("failed");
+             }
+         });
+     });
 
 
     /*
