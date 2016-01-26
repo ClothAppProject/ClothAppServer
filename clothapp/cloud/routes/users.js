@@ -69,7 +69,7 @@ module.exports = function (app) {
         query.find({
             success: function (results) {
                 //TODO: informare il client se la foto non è presente o l'utente non esiste
-                var utente= results;
+                var utente= results[0];
                 res.send(utente.get("fotoProfilo"));
             },
             error: function () {
@@ -126,9 +126,11 @@ module.exports = function (app) {
         query.find({
             success: function (results) {
                 //TODO: informare il client se user non esiste o se array vuoto
-                var utente= results;
-                console.log(utente);
-                res.send(utente.get('follower'));
+                var utente= results[0];
+                try{
+                    res.send(utente.get('followers'));
+                }
+                catch(err){res.send("error:"+err.message);}
             },
             error: function () {
                 res.send("failed");
@@ -145,7 +147,7 @@ module.exports = function (app) {
         query.find({
             success: function (results) {
                 //TODO: informare il client se user non esiste o se array vuoto
-                var utente= results;
+                var utente= results[0];
                 res.send(utente.get('following'));
             },
             error: function () {
@@ -162,9 +164,10 @@ module.exports = function (app) {
         query.find({
             success: function (results) {
                 //TODO: informare client se user non esiste o se array vuoto
-                var utente= results;
-                var shops=utente.get('preferiti');
-                shops=shops.concat(utente.get('preferitiOnline'));
+                var utente= results[0];
+                var local=utente.get('preferiti');
+                var online=utente.get('preferitiOnline')
+                var shops=local.concat(online);
                 res.send(shops);
             },
             error: function () {
@@ -181,7 +184,7 @@ module.exports = function (app) {
         query.find({
             success: function (results) {
                 //TODO: informare client se user non esisteo se array vuoto
-                var utente= results;
+                var utente= results[0];
                 res.send(utente.get('preferitiOnline'));
             },
             error: function () {
@@ -198,8 +201,11 @@ module.exports = function (app) {
              query.find({
                  success: function (results) {
                      //TODO: informare client se user non esisteo se array vuoto
-                     var utente= results;
-                     res.send(utente.get('preferiti'));
+                     var utente= results[0];
+                     try{
+                        res.send(utente.get('preferiti'));
+                     }
+                     catch(err){res.send("error:"+err.message);}
                  },
                  error: function () {
                      res.send("failed");
@@ -216,7 +222,7 @@ module.exports = function (app) {
              query.find({
                  success: function (results) {
                      //TODO: informare il client se user non esiste o se array vuoto
-                     var utente= results;
+                     var utente= results[0];
                      res.send(utente);
                  },
                  error: function () {
