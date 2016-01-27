@@ -36,9 +36,15 @@ module.exports = function (app) {
 		res.render('webclient/signout');
 	});
     
-    // Request: Get '/webclient/upload'
+    // Request: GET '/webclient/upload'
     // Result: Render "upload a photo" page.
     app.get('/webclient/upload', function (req, res) {
         res.render('webclient/upload');
+    });
+    
+    // Request: GET '/webclient/getusergallery'
+    // Result: Render "Get User Gallery" page.
+    app.get('/webclient/getusergallery', function (req, res) {
+        res.render('webclient/usergallery');
     });
 };
