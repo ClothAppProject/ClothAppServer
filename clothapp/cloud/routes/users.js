@@ -91,7 +91,7 @@ module.exports = function (app) {
 
 
     // Request: GET '/recentphotos'
-    // Result: Get the recent photos of the gallery.
+    // Result: Get the recent 20 photos of the gallery.
     app.get('/recentphotos', function (req, res) {
         var photo = Parse.Object.extend("Photo");
         var query = new Parse.Query(photo);
@@ -109,12 +109,18 @@ module.exports = function (app) {
 
 
     // Request: GET '/users/:username/galleryLike'
-    // Result: Get photos of a user with the given username order by like.
-    app.get('/users/:username/gallerylike', function (req, res) {
+    // Result: Get first photos of a user with the given username order by like.
+    app.get('/users/:username/gallerylike/:limit', function (req, res) {
             var photo = Parse.Object.extend("Photo");
             var query = new Parse.Query(photo);
+
             query.equalTo("user", req.params.username);
             query.descending("numeroLike");
+
+            query.limit(parseInt(req.params.limit));
+         //   if(limi!=null){
+          //  query.limit(limi);}
+
             query.find({
                 success: function (results) {
                     if(results.length=== 0) res.send("this username haven't profile photo or doesn't exist");
