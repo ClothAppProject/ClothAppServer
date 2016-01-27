@@ -1,5 +1,5 @@
 module.exports = function (app) {
- 
+
     // Request: GET '/users'
     // Result: Test message.
     app.get('/users', function (req, res) {
@@ -125,6 +125,42 @@ module.exports = function (app) {
                 }
             });
         });
+
+
+    // Request: POST '/recentphotos?username=myusername&password=mypassword'  body=poto file
+    // Result: upload a photo.
+
+    app.post('/users/updatephoto', function (req, res) {
+        var express = require('express');
+        var app = express();
+        app.use(express.bodyParser());
+        var username=req.param('username');
+        var password=req.param('password');
+        console.log("body= "+req.body);
+        var file=req.body.foto;
+        console.log("tipo= "+typeof req.body);
+        Parse.User.logIn(username, password, {
+          success: function(user) {
+          try{
+                var foto=file;
+                var parseFile = new Parse.File('photo.jpg',foto);
+                var photo = new Parse.Object("Photo");
+                photo.set("username",username);
+                photo.set("photo", parseFile);
+                photo.save();
+
+                res.send("update success");
+          }catch(err){res.send("error: "+err.message+ " file="+file)}
+
+          },
+          error: function(user, error) {
+            res.send("login error");
+          }
+        });
+
+    });
+
+
 
     // Request: GET '/users/:username/followers'
     // Result: Get the users who follow the user with the given username.
