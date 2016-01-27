@@ -5,50 +5,71 @@ try {
     alert(err.message);
 }
 
-// Get user profile data for the user with the given username
-function OnSubmitUserProfileData() {
-    var username = document.updForm.username.value;
+// Upload a photo to the server
+function OnUpload() {
     
-    var xhttp = new XMLHttpRequest();
+    // alert("Uploading...");
     
-    xhttp.onreadystatechange = function () {
-        if (xhttp.readyState === 4 && xhttp.status === 200) {
-            
-            var user = JSON.parse(xhttp.responseText)[0];
-            
-            // alert(xhttp.responseText);
-            
-            document.getElementById("updObjectID").setAttribute('value', user.objectId);
-            document.getElementById("updUsername").setAttribute('value', user.username);
-            document.getElementById("updEmail").setAttribute('value', user.email);
-            document.getElementById("updFirstName").setAttribute('value', user.name);
-            
-            if (user.flagISA == "Persona") {
-                var xhttpPersona = new XMLHttpRequest();
-                
-                xhttpPersona.onreadystatechange = function () {
-                    if (xhttpPersona.readyState === 4 && xhttpPersona.status === 200) {
-
-                        var person = JSON.parse(xhttpPersona.responseText)[0];
-                        
-                        // alert(xhttpPersona.resposeText);
-                        
-                        var birthday = new Date(person.date.iso);
-                        
-                        document.getElementById("updLastName").setAttribute('value', person.lastname);
-                        document.getElementById("updBirthday").setAttribute('value', birthday);
-                        document.getElementById("updCity").setAttribute('value', person.city);
-                    }
-                };
-                
-                xhttpPersona.open("GET", "http://clothapp.parseapp.com/users/" + username + "/person", true);
-                xhttpPersona.send();
+    try {
+    
+    var photo = document.uploadForm.photo;
+    
+    if (photo.files.length > 0) {
+        
+        var fullPath = photo.value;
+        if (fullPath) {
+            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+            var filename = fullPath.substring(startIndex);
+            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                filename = filename.substring(1);
             }
+            // alert(filename);
+            
+            var file = photo.files[0];
+            var name = filename;
+            
+            var parseFile = new Parse.File(name, file);
+            
+            parseFile.save().then(function() {
+                // The file has been saved to Parse.
+                
+                alert("New parse file successfully saved!");
+                
+                try {
+                
+                var PhotoObj = Parse.Object.extend("Photo");
+                var photoObj = new PhotoObj();
+                
+                photoObj.set("photo", parseFile);
+                photoObj.set("user", Parse.User.current().get("username"));
+                
+                photoObj.save(null, {
+                    success: function(photoObj) {
+                        // Execute any logic that should take place after the object is saved.
+                        alert("Created new photoObj with id " + photoObj.id);
+                        
+                        window.location.replace("http://clothapp.parseapp.com/webclient");
+                    },
+                    error: function(gameScore, error) {
+                        // Execute any logic that should take place if the save fails.
+                        // error is a Parse.Error with an error code and message.
+                        alert('Failed to create new object, with error code: ' + error.message);
+                    }
+                });
+                    
+                } catch (e) {
+                    alert(e.message);
+                }
+            }, function(error) {
+                // The file either could not be read, or could not be saved to Parse.
+                alert(error.message);
+            });
         }
-    };
-    
-    xhttp.open("GET", "http://clothapp.parseapp.com/users/" + username, true);
-    xhttp.send();
+    }
+        
+    } catch (e) {
+        alert(e.message);
+    }
     
     return false;
 }

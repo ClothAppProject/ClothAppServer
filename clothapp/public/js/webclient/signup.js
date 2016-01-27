@@ -50,7 +50,7 @@ function OnSignUp() {
                 persona.set("username", username);
 
                 persona.save(null, {
-                    success: function(gameScore) {
+                    success: function(persona) {
                         // Execute any logic that should take place after the object is saved.
                         alert('New object created with objectId: ' + persona.id);
                         
