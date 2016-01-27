@@ -33,9 +33,7 @@ function OnUpload() {
             parseFile.save().then(function() {
                 // The file has been saved to Parse.
                 
-                alert("New parse file successfully saved!");
-                
-                try {
+                // alert("New parse file successfully saved!");
                 
                 var PhotoObj = Parse.Object.extend("Photo");
                 var photoObj = new PhotoObj();
@@ -46,7 +44,7 @@ function OnUpload() {
                 photoObj.save(null, {
                     success: function(photoObj) {
                         // Execute any logic that should take place after the object is saved.
-                        alert("Created new photoObj with id " + photoObj.id);
+                        // alert("Created new photoObj with id " + photoObj.id);
                         
                         window.location.replace("http://clothapp.parseapp.com/webclient");
                     },
@@ -57,9 +55,6 @@ function OnUpload() {
                     }
                 });
                     
-                } catch (e) {
-                    alert(e.message);
-                }
             }, function(error) {
                 // The file either could not be read, or could not be saved to Parse.
                 alert(error.message);
