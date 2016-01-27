@@ -44,6 +44,7 @@ function OnUpload() {
                 photoObj.save(null, {
                     success: function(photoObj) {
                         // Execute any logic that should take place after the object is saved.
+                        
                         // alert("Created new photoObj with id " + photoObj.id);
                         
                         window.location.replace("http://clothapp.parseapp.com/webclient");
