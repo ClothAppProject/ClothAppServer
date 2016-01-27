@@ -25,19 +25,19 @@ module.exports = function (app) {
 	});
     
     // Request:	GET '/webclient/setuserdata'
-	// Result: Render set user profile data" page.
+	// Result: Render "set user profile data" page.
 	app.get('/webclient/setuserdata', function (req, res) {
 		res.render('webclient/setuserdata');
 	});
     
     // Request:	GET '/webclient/signout'
-	// Result: Render set user profile data" page.
+	// Result: Render "logout" page.
 	app.get('/webclient/signout', function (req, res) {
 		res.render('webclient/signout');
 	});
     
-    // Request: POST '/webclient/upload'
-    // Result: Upload a new photo for the user with the given username.
+    // Request: Get '/webclient/upload'
+    // Result: Render "upload a photo" page.
     app.get('/webclient/upload', function (req, res) {
         res.render('webclient/upload');
     });
