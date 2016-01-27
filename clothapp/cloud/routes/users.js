@@ -89,6 +89,25 @@ module.exports = function (app) {
         });
     });
 
+
+    // Request: GET '/recentphotos'
+    // Result: Get the recent photos of the gallery.
+    app.get('/recentphotos', function (req, res) {
+        var photo = Parse.Object.extend("Photo");
+        var query = new Parse.Query(photo);
+        query.descending("createdAt");
+        query.find({
+            success: function (results) {
+                if(results.length=== 0) res.send("no photo found");
+                else res.send(results);
+            },
+            error: function () {
+                res.send("failed");
+            }
+        });
+    });
+
+
     // Request: GET '/users/:username/galleryLike'
     // Result: Get photos of a user with the given username order by like.
     app.get('/users/:username/gallerylike', function (req, res) {
