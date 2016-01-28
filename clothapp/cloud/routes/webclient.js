@@ -47,4 +47,22 @@ module.exports = function (app) {
     app.get('/webclient/getusergallery', function (req, res) {
         res.render('webclient/usergallery');
     });
+    
+    // Request: GET '/webclient/getusergallery'
+    // Result: Render "Get User Gallery" page.
+    app.get('/webclient/getrecentphotos', function (req, res) {
+        res.render('webclient/recentphotos');
+    });
+    
+    // Request: GET '/webclient/getusergallery'
+    // Result: Render "Get User Gallery" page.
+    app.get('/webclient/gettopphotos', function (req, res) {
+        res.render('webclient/topphotos');
+    });
+    
+    // Request: GET '/webclient/getusergallery'
+    // Result: Render "Get User Gallery" page.
+    app.get('/webclient/getuserprofilephoto', function (req, res) {
+        res.render('webclient/userprofilephoto');
+    });
 };
