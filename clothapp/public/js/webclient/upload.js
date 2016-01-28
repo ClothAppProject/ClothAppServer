@@ -46,7 +46,18 @@ function OnUpload() {
                         // Execute any logic that should take place after the object is saved.
                         // alert("Created new photoObj with id " + photoObj.id);
                         
-                        window.location.replace("http://clothapp.parseapp.com/webclient");
+                        var xhttp = new XMLHttpRequest();
+                        xhttp.onreadystatechange = function (e) {
+                            if (xhttp.readyState === 4 && xhttp.status === 200) {
+                                window.location.replace("http://clothapp.parseapp.com/webclient");
+                            }
+                        };
+                        xhttp.open("GET", "http://clothapp.parseapp.com/createthumbnail/" + photoObj.id, true);
+                        xhttp.send();
+                        
+                        
+                        
+                        // window.location.replace("http://clothapp.parseapp.com/webclient");
                     },
                     error: function(gameScore, error) {
                         // Execute any logic that should take place if the save fails.

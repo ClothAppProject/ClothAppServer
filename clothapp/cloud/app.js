@@ -13,6 +13,9 @@ require('cloud/routes/users.js')(app);
 // Route requests to a test web client
 require('cloud/routes/webclient.js')(app);
 
+// Route requests to the web app
+require('cloud/routes/webapp.js')(app);
+
 app.get('/reset_psw', function (req, res) {
 	res.render('reset_psw'); 
 });
