@@ -17,13 +17,6 @@ function checkLogin() {
         $("#signupRow").remove();
         $("#signinRow").remove();
     } else {
-        // alert("Not logged in...");
-        
-        /*$("#setUserDataBtn,#uploadPhotoBtn,#getUserGallery").each(function(){
-            $(this).click(function(e) {
-                e.preventDefault();
-            });
-        });*/
         
         $("#setUserDataRow").remove();
         $("#uploadRow").remove();
