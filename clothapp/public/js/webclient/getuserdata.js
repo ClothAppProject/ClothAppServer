@@ -30,7 +30,7 @@ function OnSubmitUserProfileData() {
                 xhttpPersona.onreadystatechange = function () {
                     if (xhttpPersona.readyState === 4 && xhttpPersona.status === 200) {
 
-                        var person = JSON.parse(xhttpPersona.responseText)[0];
+                        var person = JSON.parse(xhttpPersona.responseText);
                         
                         // alert(xhttpPersona.resposeText);
                         
@@ -42,7 +42,7 @@ function OnSubmitUserProfileData() {
                     }
                 };
                 
-                xhttpPersona.open("GET", "http://clothapp.parseapp.com/users/" + username + "/person", true);
+                xhttpPersona.open("GET", "http://clothapp.parseapp.com/users/person/" + username, true);
                 xhttpPersona.send();
             }
         }
