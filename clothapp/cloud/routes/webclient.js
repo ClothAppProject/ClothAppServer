@@ -25,43 +25,44 @@ module.exports = function (app) {
 	});
     
     // Request:	GET '/webclient/setuserdata'
-	// Result: Render set user profile data" page.
+	// Result: Render "set user profile data" page.
 	app.get('/webclient/setuserdata', function (req, res) {
 		res.render('webclient/setuserdata');
 	});
     
     // Request:	GET '/webclient/signout'
-	// Result: Render set user profile data" page.
+	// Result: Render "logout" page.
 	app.get('/webclient/signout', function (req, res) {
 		res.render('webclient/signout');
 	});
     
-    // Request: POST '/webclient/upload'
-    // Result: Upload a new photo for the user with the given username.
-    app.post('/webclient/upload', function (req, res) {
-        res.send('Uploading...');
+    // Request: GET '/webclient/upload'
+    // Result: Render "upload a photo" page.
+    app.get('/webclient/upload', function (req, res) {
+        res.render('webclient/upload');
     });
     
-    // Request: POST '/webclient/upload'
-    // Result: Upload a new photo for the user with the given username.
-    app.post('/webclient/update', function (req, res) {
-        var query = new Parse.Query(Parse.User);
-        query.equalTo('username', req.body.username);
-        
-        query.find().then(function (results) {
-            console.log('Query success');
-            return results[0].save({name: 'nome01'});
-            
-        }).then(function (obj) {
-            console.log('Save success');
-            res.send('success');
-            
-        }, function (error) {
-            console.log('Save fail');
-            console.log(error.code);
-            console.log(error.message);
-            res.send('error');
-            
-        })
+    // Request: GET '/webclient/getusergallery'
+    // Result: Render "Get User Gallery" page.
+    app.get('/webclient/getusergallery', function (req, res) {
+        res.render('webclient/usergallery');
+    });
+    
+    // Request: GET '/webclient/getusergallery'
+    // Result: Render "Get User Gallery" page.
+    app.get('/webclient/getrecentphotos', function (req, res) {
+        res.render('webclient/recentphotos');
+    });
+    
+    // Request: GET '/webclient/getusergallery'
+    // Result: Render "Get User Gallery" page.
+    app.get('/webclient/getusertopphotos', function (req, res) {
+        res.render('webclient/usertopphotos');
+    });
+    
+    // Request: GET '/webclient/getusergallery'
+    // Result: Render "Get User Gallery" page.
+    app.get('/webclient/getuserprofilephoto', function (req, res) {
+        res.render('webclient/userprofilephoto');
     });
 };

@@ -29,33 +29,45 @@ html(lang='en')
             .row
                 .col-sm-3
                     p Click on one of the following links.
-                    .row
+                    #signupRow.row
                         .col-sm-12
-                            a(href='/webclient/signup').btn.btn-default.btn-block Sign up
+                            a.btn.btn-default.btn-block(href='/webclient/signup') Sign up
+                            br
+                    #signinRow.row
+                        .col-sm-12
+                            a.btn.btn-default.btn-block(href='/webclient/signin') Sign in
                             br
                     .row
                         .col-sm-12
-                            a(href='/webclient/signin').btn.btn-default.btn-block Sign in
+                            a.btn.btn-default.btn-block(href='/webclient/signout') Sign out
                             br
                     .row
                         .col-sm-12
-                            a(href='/webclient/signout').btn.btn-default.btn-block Sign out
+                            a.btn.btn-default.btn-block(href='/webclient/getuserdata') Get user profile data
+                            br
+                    #setUserDataRow.row
+                        .col-sm-12
+                            a.btn.btn-default.btn-block(href='/webclient/setuserdata') Set user profile data
+                            br
+                    #uploadRow.row
+                        .col-sm-12
+                            a.btn.btn-default.btn-block(href='/webclient/upload') Upload a photo
                             br
                     .row
                         .col-sm-12
-                            a(href='/webclient/getuserdata').btn.btn-default.btn-block Get user profile data
+                            a.btn.btn-default.btn-block(href='/webclient/getusergallery') Get user gallery
                             br
                     .row
                         .col-sm-12
-                            a#setuserDataBtn.btn.btn-default.btn-block(href='/webclient/setuserdata') Set user profile data
+                            a.btn.btn-default.btn-block(href='/webclient/getrecentphotos') Get recent photos
                             br
                     .row
                         .col-sm-12
-                            a#uploadPhotoBtn.btn.btn-default.btn-block.disabled(href='/webclient/uploadphoto') Upload a photo
+                            a.btn.btn-default.btn-block(href='/webclient/getusertopphotos') Get user top photos
                             br
                     .row
                         .col-sm-12
-                            a(href='/webclient/getusergallery').btn.btn-default.btn-block.disabled Get user gallery
+                            a.btn.btn-default.btn-block(href='/webclient/getuserprofilephoto') Get user profile photo
                             br
             br
             hr

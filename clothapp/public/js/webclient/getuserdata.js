@@ -14,16 +14,36 @@ function OnSubmitUserProfileData() {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
             
-            var user = JSON.parse(xhttp.responseText)[0];
+            var user = JSON.parse(xhttp.responseText);
             
-            alert(xhttp.responseText);
+            // alert(xhttp.responseText);
             
             document.getElementById("updObjectID").setAttribute('value', user.objectId);
             document.getElementById("updUsername").setAttribute('value', user.username);
             document.getElementById("updEmail").setAttribute('value', user.email);
             document.getElementById("updFirstName").setAttribute('value', user.name);
-            document.getElementById("updLastName").setAttribute('value', user.lastname);
-            document.getElementById("updBirthday").setAttribute('value', Date(user.date.iso));
+            
+            if (user.flagISA == "Persona") {
+                var xhttpPersona = new XMLHttpRequest();
+                
+                xhttpPersona.onreadystatechange = function () {
+                    if (xhttpPersona.readyState === 4 && xhttpPersona.status === 200) {
+
+                        var person = JSON.parse(xhttpPersona.responseText);
+                        
+                        // alert(xhttpPersona.resposeText);
+                        
+                        var birthday = new Date(person.date.iso);
+                        
+                        document.getElementById("updLastName").setAttribute('value', person.lastname);
+                        document.getElementById("updBirthday").setAttribute('value', birthday);
+                        document.getElementById("updCity").setAttribute('value', person.city);
+                    }
+                };
+                
+                xhttpPersona.open("GET", "http://clothapp.parseapp.com/users/person/" + username, true);
+                xhttpPersona.send();
+            }
         }
     };
     

@@ -52,9 +52,10 @@ module.exports = function (app) {
         var userphoto = Parse.Object.extend("UserPhoto");
         var query = new Parse.Query(userphoto);
         query.equalTo("username", req.params.username);
-        query.find({
-            success: function (results) {
-                try{
+        query.first({
+            success: function (result) {
+                res.send(result);
+                /*try{
                     //console.log("lunghezza: "+results.length);
                     if(results.length===0) res.send("this username haven't profile photo or doesn't exist");
                     else{
@@ -63,7 +64,7 @@ module.exports = function (app) {
                         res.send(foto);
                     }
                 }
-                catch(err){res.send("error: "+err.message)}
+                catch(err){res.send("error: "+err.message)}*/
             },
             error: function () {
                 res.send("failed");

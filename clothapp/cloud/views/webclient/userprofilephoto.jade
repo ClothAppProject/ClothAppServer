@@ -1,0 +1,40 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        title ClothApp - User Profile Photo
+        // jQuery
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+        // Bootstrap Core CSS
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', type='text/css')
+        // Bootstrap Core JavaScript
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js')
+        // Parse
+        script(src='//www.parsecdn.com/js/parse-1.6.12.min.js')
+        // Custom scripts
+        script(src='/js/webclient/userprofilephoto.js')
+    body
+        .container
+            hr
+            h2.text-center Get User Profile Photo
+            br
+            .row
+                .col-sm-6.col-sm-offset-3
+                    form.form-horizontal(name='userProfilePhotoForm', role='form', method='get', onsubmit='return getUserProfilePhoto();')
+                        .form-group
+                            label.control-label.col-sm-2 Username:
+                            .col-sm-10
+                                input.form-control(name='username', type='text', placeholder='Username', required)
+                        .form-group
+                            .col-sm-offset-2.col-sm-10
+                                button.btn.btn-default(type='submit') Get User Profile Photo
+            br
+            hr
+            br
+            .row
+                .col-sm-8.col-sm-offset-2#gallery
+            br
+            hr
+            a(href='http://clothapp.parseapp.com/webclient').text-center Home
