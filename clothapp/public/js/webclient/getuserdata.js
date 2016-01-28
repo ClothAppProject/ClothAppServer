@@ -24,7 +24,6 @@ function OnSubmitUserProfileData() {
             document.getElementById("updFirstName").setAttribute('value', user.name);
             
             if (user.flagISA == "Persona") {
-                
                 var xhttpPersona = new XMLHttpRequest();
                 
                 xhttpPersona.onreadystatechange = function () {
