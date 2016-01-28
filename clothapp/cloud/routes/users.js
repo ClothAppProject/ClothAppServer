@@ -18,7 +18,7 @@ module.exports = function (app) {
             try{
                 //TODO: aggiungere le informazioni a seconda se user è una persona, negozio o negozioOnline
                 if(results.length===0) res.send("this username doesn't exist");
-                res.send(results);
+                res.send(results[0]);
             }catch(err){res.send("error: "+err.message)}
             },
             error: function () {
@@ -29,7 +29,7 @@ module.exports = function (app) {
 
      // Request: GET '/users/:name'
      // Result: Get the user profiles of the user with the given name.
-     app.get('/users/:name', function (req, res) {
+     app.get('/users/name/:name', function (req, res) {
           var query = new Parse.Query(Parse.User);
           query.equalTo("name", req.params.name);
           query.find({
@@ -132,39 +132,6 @@ module.exports = function (app) {
             });
         });
 
-
-    // Request: POST '/recentphotos?username=myusername&password=mypassword'  body=poto file
-    // Result: upload a photo.
-
-    app.post('/users/updatephoto', function (req, res) {
-        var express = require('express');
-        var app = express();
-        app.use(express.bodyParser());
-        var username=req.param('username');
-        var password=req.param('password');
-        console.log("body= "+req.body);
-        var file=req.body.foto;
-        console.log("tipo= "+typeof req.body);
-        Parse.User.logIn(username, password, {
-          success: function(user) {
-          try{
-                var foto=file;
-                var parseFile = new Parse.File('photo.jpg',foto);
-                var photo = new Parse.Object("Photo");
-                photo.set("username",username);
-                photo.set("photo", parseFile);
-                photo.save();
-
-                res.send("update success");
-          }catch(err){res.send("error: "+err.message+ " file="+file)}
-
-          },
-          error: function(user, error) {
-            res.send("login error");
-          }
-        });
-
-    });
 
 
 
@@ -359,67 +326,4 @@ module.exports = function (app) {
          });
      });
 
-
-    /*
-        // Request: POST '/users/signup'
-        // Result: Create a new user with the given username, password, email.
-        app.post('/users/signup', function (req, res) {
-            var user = new Parse.User();
-            user.set("username", req.body.username);
-            user.set("password", req.body.password);
-            user.set("email", req.body.email);
-
-            user.signUp(null, {
-                success: function (user) {
-                    // Hooray! Let them use the app now.
-                    res.send('sigup success');
-                },
-                error: function (user, error) {
-                    // Show the error message somewhere and let the user try again.
-                    // alert("Error: " + error.code + " " + error.message);
-                    res.send('error');
-                }
-            });
-        });
-
-        // Request: POST '/users/login'
-        // Result: Log in a user with the given username and password.
-        app.post('/users/login', function (req, res) {
-            Parse.User.logIn(req.body.username, req.body.password, {
-                success: function (user) {
-                    //fare cose dopo il login di successo.
-                    res.send('signin success');
-                },
-                error: function (user, error) {
-                    // Accesso non riuscito. Controllare l'errore per capire perchè.
-                    res.send('error');
-                }
-            });
-        });
-        */
-
-        // Request: GET '/users/:username/profileThumbnail'
-            // Result: Get the user profile thumbnail of the user with the given username.
-          //  app.get('/users/:username/profileThumbnail', function (req, res) {
-                // non serve?
-            //    res.send('Profile Thumbnail: Da implementare...');
-           // });
-
-
-    // Request: GET '/users/:username/brands'
-    // Result: Get the favorite brands of the user with the given username.
-    //app.get('/users/:username/brands', function (req, res) {
-       /* var query = new Parse.Query(Parse.User);
-        query.equalTo("user", req.params.username);
-        query.find({
-            success: function (results) {
-                var utente= results;
-                res.send(utente.get('brand'));
-            },
-            error: function () {
-                res.send("failed");
-            }
-        });
-         res.send('Profile Thumbnail: Da implementare...'); */
-  //  });
 };
