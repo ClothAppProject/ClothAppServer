@@ -19,11 +19,13 @@ function getUserProfilePhoto() {
                 
                 try {
 
-                    var gallery = JSON.parse(xhttp.responseText);
+                    // alert(xhttp.responseText);
+                    
+                    var file = JSON.parse(xhttp.responseText);
 
                     var div = document.getElementById("gallery");
 
-                    var content = '<div class="row"><div class="col-sm-6 col-sm-push-3" style="width:300px; height:300px; background-size:cover; background-image:url(\'' + gallery[i].photo.url + '\')" ></div></div>';
+                    var content = '<div class="row"><div class="col-sm-6 col-sm-push-3" style="width:300px; height:300px; background-size:cover; background-image:url(\'' + file.profilePhoto.url + '\')" ></div></div>';
 
                     // alert(content);
 
