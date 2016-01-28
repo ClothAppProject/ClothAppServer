@@ -14,7 +14,7 @@ function OnSubmitUserProfileData() {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
             
-            var user = JSON.parse(xhttp.responseText)[0];
+            var user = JSON.parse(xhttp.responseText);
             
             // alert(xhttp.responseText);
             
