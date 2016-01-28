@@ -13,13 +13,13 @@ function checkLogin() {
     if (currentUser) {
         var username = currentUser.get('username');
         document.getElementById('userInfo').innerHTML = 'You are currently logged in as ' + username;
+        
+        $("#signupRow").remove();
+        $("#signinRow").remove();
     } else {
         // alert("Not logged in...");
         
-        $("#setUserDataBtn,#uploadPhotoBtn,#getUserGallery").each(function(){
-            $(this).click(function(e) {
-                e.preventDefault();
-            });
-        });
+        $("#setUserDataRow").remove();
+        $("#uploadRow").remove();
     }
 }
