@@ -56,8 +56,8 @@ module.exports = function (app) {
     
     // Request: GET '/webclient/getusergallery'
     // Result: Render "Get User Gallery" page.
-    app.get('/webclient/gettopphotos', function (req, res) {
-        res.render('webclient/topphotos');
+    app.get('/webclient/getusertopphotos', function (req, res) {
+        res.render('webclient/usertopphotos');
     });
     
     // Request: GET '/webclient/getusergallery'
