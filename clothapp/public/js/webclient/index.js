@@ -17,7 +17,6 @@ function checkLogin() {
         $("#signupRow").remove();
         $("#signinRow").remove();
     } else {
-        // alert("Not logged in...");
         
         $("#setUserDataRow").remove();
         $("#uploadRow").remove();
