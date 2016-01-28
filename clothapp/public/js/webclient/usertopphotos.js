@@ -55,7 +55,7 @@ function getUserGalleryLike() {
             }
         };
 
-        xhttp.open("GET", "http://clothapp.parseapp.com/users/" + username + "/gallerylike", true);
+        xhttp.open("GET", "http://clothapp.parseapp.com/users/" + username + "/gallerylike/20", true);
         xhttp.send();
         
     } catch (e) {
