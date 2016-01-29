@@ -64,23 +64,52 @@ module.exports = function (app) {
      
 
     // Request: GET '/users/:username/gallery'
-    // Result: Get the gallery of the user with the given username.
-    app.get('/users/:username/gallery', function (req, res) {
-        
-        var Photo = Parse.Object.extend("Photo");
-        
-        var query = new Parse.Query(Photo);
-        query.equalTo("user", req.params.username);
-        
-        query.find({
-            success: function (results) {
-                res.send(results);
-            },
-            error: function () {
-                res.send("failed");
-            }
-        });
-    });
+    // Result: Get the gallery of the user with the given username from start to end.
+       app.get('/users/:username/gallery/:start/:end', function (req, res) {
+               try {
+
+                       var start = req.params.start;
+                       var end = req.params.end;
+                       var delta = end - start + 1;
+
+                       if (delta <= 0) {
+                           res.send("Invalid parameters (start < end)");
+                       }
+
+               var Photo = Parse.Object.extend("Photo");
+
+               var query = new Parse.Query(Photo);
+
+               query.equalTo("user", req.params.username);
+               query.skip(start - 1);
+               query.limit(delta);
+               query.descending("numeroLike");
+
+               query.find({
+                   success: function (results) {
+                               var Image = require("parse-image");
+
+                               var resizedImages = [];
+
+                               for (var i = 0; i < results.length; i++) {
+
+                                   var thumbnail = results[i].get("thumbnail");
+
+                                   if (thumbnail != null) {
+                                       resizedImages.push(thumbnail.url());
+                                   }
+                               }
+
+                               res.send(resizedImages);
+                           },
+                   error: function () {
+                       res.send("failed");
+                   }
+               });
+               }catch(e) {
+                            res.send(e.message);
+                        }
+           });
 
 
     // Request: GET '/recentphotos'
