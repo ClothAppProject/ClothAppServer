@@ -375,7 +375,7 @@ module.exports = function (app) {
            });
        });
 
-   };
+
 
 //------------------------------------------------------------------------------FUNZIONI DI ORDINAMENTO FOTO GENERALI----------------------------------------------------------------
     // Request: GET '/recentgallery/:start/:end'
@@ -543,3 +543,5 @@ module.exports = function (app) {
             }
         });
     });
+
+   };
