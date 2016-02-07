@@ -65,207 +65,189 @@ module.exports = function (app) {
 
     // Request: GET '/users/:username/gallery'
     // Result: Get the gallery of the user with the given username from start to end.
-       app.get('/users/:username/gallery/:start/:end', function (req, res) {
-               try {
+    app.get('/users/:username/gallery/:start/:end', function (req, res) {
+        try {
 
-                       var start = req.params.start;
-                       var end = req.params.end;
-                       var delta = end - start + 1;
+            var start = req.params.start;
+            var end = req.params.end;
+            var delta = end - start + 1;
 
-                       if (delta <= 0) {
-                           res.send("Invalid parameters (start < end)");
-                       }
+            if (delta <= 0) {
+                res.send("Invalid parameters (start < end)");
+            }
 
-               var Photo = Parse.Object.extend("Photo");
+            var Photo = Parse.Object.extend("Photo");
 
-               var query = new Parse.Query(Photo);
+            var query = new Parse.Query(Photo);
 
-               query.equalTo("user", req.params.username);
-               query.skip(start - 1);
-               query.limit(delta);
-               query.descending("numeroLike");
+            query.equalTo("user", req.params.username);
+            query.skip(start - 1);
+            query.limit(delta);
+            query.descending("numeroLike");
 
-               query.find({
-                   success: function (results) {
-                               var Image = require("parse-image");
+            query.find({
+                success: function (results) {
+                    var Image = require("parse-image");
 
-                               var resizedImages = [];
+                    var resizedImages = [];
 
-                               for (var i = 0; i < results.length; i++) {
+                    for (var i = 0; i < results.length; i++) {
 
-                                   var thumbnail = results[i].get("thumbnail");
+                        var thumbnail = results[i].get("thumbnail");
 
-                                   if (thumbnail != null) {
-                                       resizedImages.push(thumbnail.url());
-                                   }
-                               }
-
-                               res.send(resizedImages);
-                           },
-                   error: function () {
-                       res.send("failed");
-                   }
-               });
-               }catch(e) {
-                            res.send(e.message);
+                        if (thumbnail != null) {
+                            resizedImages.push(thumbnail.url());
                         }
-           });
+                    }
+
+                    res.send(resizedImages);
+                },
+                error: function () {
+                    res.send("failed");
+                }
+            });
+            
+        } catch(e) {
+            res.send(e.message);
+        }
+    });
+    
+
+    // Request: GET '/users/:username/galleryLike'
+    // Result: Get first photos of a user with the given username order by like.
+    app.get('/users/:username/gallerylike/:start/:end', function (req, res) {
+        try {
+
+            var start = req.params.start;
+            var end = req.params.end;
+            var delta = end - start + 1;
+
+            if (delta <= 0) {
+                res.send("Invalid parameters (start < end)");
+            }
+
+            var Photo = Parse.Object.extend("Photo");
+
+            var query = new Parse.Query(Photo);
+
+            query.equalTo("user", req.params.username);
+            query.skip(start - 1);
+            query.limit(delta);
+            query.descending("numeroLike");
+
+            query.find({
+                success: function (results) {
+                    var Image = require("parse-image");
+
+                    var resizedImages = [];
+
+                    for (var i = 0; i < results.length; i++) {
+
+                        var thumbnail = results[i].get("thumbnail");
+
+                        if (thumbnail != null) {
+                            resizedImages.push(thumbnail.url());
+                        }
+                    }
+
+                    res.send(resizedImages);
+                },
+                error: function () {
+                    res.send("failed");
+                }
+            });
+            
+        } catch(e) {
+            res.send(e.message);
+        }
+    });
 
 
-    // Request: GET '/recentphotos'
-    // Result: Get the recent 20 photos of the gallery.
-    /*app.get('/recentphotos', function (req, res) {
-        
-        var Photo = Parse.Object.extend("Photo");
-        
-        var query = new Parse.Query(Photo);
-        query.descending("createdAt");
-        
-        query.find({
-            success: function (results) {
-                res.send(results);
+
+
+    // Request: GET '/users/:username/followers'
+    // Result: Get the users who follow the user with the given username.
+    app.get('/users/:username/followers', function (req, res) {
+
+        var query = new Parse.Query(Parse.User);
+        query.equalTo("username", req.params.username);
+
+        query.first({
+            success: function (user) {
+
+                var followers = user.get("followers");
+
+                if (followers != null) {
+                    res.send(followers);
+                } else {
+                    res.send([]);
+                }
             },
             error: function () {
                 res.send("failed");
             }
         });
-    });                     questa funzione non ha senso se c'è recentgallery*/
-    
+    });
 
-     // Request: GET '/users/:username/galleryLike'
-       // Result: Get first photos of a user with the given username order by like.
-       app.get('/users/:username/gallerylike/:start/:end', function (req, res) {
-           try {
+    // Request: GET '/users/:username/following'
+    // Result: Get the followed users of the user with the given username.
+    app.get('/users/:username/following', function (req, res) {
 
-                   var start = req.params.start;
-                   var end = req.params.end;
-                   var delta = end - start + 1;
+        var query = new Parse.Query(Parse.User);
+        query.equalTo("username", req.params.username);
 
-                   if (delta <= 0) {
-                       res.send("Invalid parameters (start < end)");
-                   }
+        query.first({
+            success: function (user) {
 
-           var Photo = Parse.Object.extend("Photo");
+                var following = user.get("following");
 
-           var query = new Parse.Query(Photo);
-
-           query.equalTo("user", req.params.username);
-           query.skip(start - 1);
-           query.limit(delta);
-           query.descending("numeroLike");
-
-           query.find({
-               success: function (results) {
-                           var Image = require("parse-image");
-
-                           var resizedImages = [];
-
-                           for (var i = 0; i < results.length; i++) {
-
-                               var thumbnail = results[i].get("thumbnail");
-
-                               if (thumbnail != null) {
-                                   resizedImages.push(thumbnail.url());
-                               }
-                           }
-
-                           res.send(resizedImages);
-                       },
-               error: function () {
-                   res.send("failed");
-               }
-           });
-           }catch(e) {
-                        res.send(e.message);
-                    }
-       });
+                if (following != null) {
+                    res.send(following);
+                } else {
+                    res.send([]);
+                }
+            },
+            error: function () {
+                res.send("failed");
+            }
+        });
+    });
 
 
+    // Request: GET '/users/:username/shops'
+    // Result: Get the favorite shops of the user (person) with the given username.
+    app.get('/users/:username/shops', function (req, res) {
 
+        var Persona = Parse.Object.extend("Persona");
 
-       // Request: GET '/users/:username/followers'
-       // Result: Get the users who follow the user with the given username.
-       app.get('/users/:username/followers', function (req, res) {
+        var query = new Parse.Query(Persona);
+        query.equalTo("username", req.params.username);
 
-           var query = new Parse.Query(Parse.User);
-           query.equalTo("username", req.params.username);
+        query.first({
+            success: function (user) {
 
-           query.first({
-               success: function (user) {
+                // res.send(user);
 
-                   var followers = user.get("followers");
+                var shops = user.get("preferiti");
+                var onlineShops = user.get("preferitiOnline");
 
-                   if (followers != null) {
-                       res.send(followers);
-                   } else {
-                       res.send([]);
-                   }
-               },
-               error: function () {
-                   res.send("failed");
-               }
-           });
-       });
+                var result = [];
 
-       // Request: GET '/users/:username/following'
-       // Result: Get the followed users of the user with the given username.
-       app.get('/users/:username/following', function (req, res) {
+                if (shops != null) {
+                    result = result.concat(shops);
+                }
 
-           var query = new Parse.Query(Parse.User);
-           query.equalTo("username", req.params.username);
+                if (onlineShops != null) {
+                    result = result.concat(onlineShops);
+                }
 
-           query.first({
-               success: function (user) {
-
-                   var following = user.get("following");
-
-                   if (following != null) {
-                       res.send(following);
-                   } else {
-                       res.send([]);
-                   }
-               },
-               error: function () {
-                   res.send("failed");
-               }
-           });
-       });
-
-
-       // Request: GET '/users/:username/shops'
-       // Result: Get the favorite shops of the user (person) with the given username.
-       app.get('/users/:username/shops', function (req, res) {
-
-           var Persona = Parse.Object.extend("Persona");
-
-           var query = new Parse.Query(Persona);
-           query.equalTo("username", req.params.username);
-
-           query.first({
-               success: function (user) {
-
-                   // res.send(user);
-
-                   var shops = user.get("preferiti");
-                   var onlineShops = user.get("preferitiOnline");
-
-                   var result = [];
-
-                   if (shops != null) {
-                       result = result.concat(shops);
-                   }
-
-                   if (onlineShops != null) {
-                       result = result.concat(onlineShops);
-                   }
-
-                   res.send(result);
-               },
-               error: function () {
-                   res.send("failed");
-               }
-           });
-       });
+                res.send(result);
+            },
+            error: function () {
+                res.send("failed");
+            }
+        });
+    });
 
        // Request: GET '/users/:username/shops'
        // Result: Get the favorite virtualshops of the user with the given username.
