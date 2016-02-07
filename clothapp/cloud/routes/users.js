@@ -535,4 +535,75 @@ module.exports = function(app) {
         });
     });
 
+    
+    app.get('/createprofilethumbnail/:id', function(req, res) {
+
+        var id = req.params.id;
+        var photoObject;
+
+        var UserPhoto = Parse.Object.extend("UserPhoto");
+
+        var query = new Parse.Query(UserPhoto);
+        query.equalTo("objectId", id);
+
+        query.first({
+            success: function(photo) {
+
+                photoObject = photo;
+
+                var Image = require("parse-image");
+
+                Parse.Cloud.httpRequest({
+                    url: photo.get("profilePhoto").url()
+
+                }).then(function(response) {
+                    var image = new Image();
+                    return image.setData(response.buffer);
+
+                }).then(function(image) {
+                    var size = Math.min(image.width(), image.height());
+
+                    return image.crop({
+                        left: (image.width() - size) / 2,
+                        top: (image.height() - size) / 2,
+                        width: size,
+                        height: size
+                    });
+
+                }).then(function(image) {
+                    return image.scale({
+                        width: 300,
+                        height: 300
+                    });
+
+                }).then(function(image) {
+                    return image.setFormat("JPEG");
+
+                }).then(function(image) {
+                    return image.data();
+
+                }).then(function(buffer) {
+                    var base64 = buffer.toString("base64");
+                    var cropped = new Parse.File("thumbnail.jpg", {
+                        base64: base64
+                    });
+                    return cropped.save();
+
+                }).then(function(cropped) {
+                    photoObject.set("thumbnail", cropped);
+                    return photoObject.save();
+
+                }).then(function(photo) {
+                    res.send(photo);
+
+                }, function(error) {
+                    res.send(error);
+                });
+            },
+            error: function() {
+                res.send("failed");
+            }
+        });
+    });
+
 };
