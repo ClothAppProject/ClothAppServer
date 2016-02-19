@@ -123,7 +123,7 @@ function createCard(i, imageUrl, username, tipo, hashtags) {
     var hashtagHtml = createHashtagHTML(hashtags);
     
     var result = ' \
-        <div class="col s6 m6 l3"> \
+        <div class="col s12 m6 l3"> \
             <div id="image' + i +'" class="card hoverable" style="opacity: 0"> \
                 <div class="card-image waves-effect waves-block waves-light"> \
                     <img class="activator" width="250" style="margin: 0 auto" src="' + imageUrl + '"> \
