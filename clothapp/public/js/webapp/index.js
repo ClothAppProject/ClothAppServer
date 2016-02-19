@@ -40,6 +40,9 @@ function getRecentPhotos(start, end) {
                 try {
 
                     var gallery = JSON.parse(xhttp.responseText);
+                    
+                    // alert(gallery[0].thumbnail.url);
+                    // alert(gallery[0].hashtag);
 
                     var div = document.getElementById("gallery");
 
@@ -49,18 +52,18 @@ function getRecentPhotos(start, end) {
 
                         content += '<div class="row">';
 
-                        content += createCard(i, gallery[i]);
+                        content += createCard(i, gallery[i].thumbnail.url, gallery[i].user, gallery[i].tipo, gallery[i].hashtag);
 
                         if (i + 1 < gallery.length) {
-                            content += createCard(i + 1, gallery[i + 1]);
+                            content += createCard(i + 1, gallery[i + 1].thumbnail.url, gallery[i + 1].user, gallery[i + 1].tipo, gallery[i + 1].hashtag);
                         }
 
                         if (i + 2 < gallery.length) {
-                            content += createCard(i + 2, gallery[i + 2]);
+                            content += createCard(i + 2, gallery[i + 2].thumbnail.url, gallery[i + 2].user, gallery[i + 2].tipo, gallery[i + 2].hashtag);
                         }
 
                         if (i + 3 < gallery.length) {
-                            content += createCard(i + 3, gallery[i + 3]);
+                            content += createCard(i + 3, gallery[i + 3].thumbnail.url, gallery[i + 3].user, gallery[i + 3].tipo, gallery[i + 3].hashtag);
                         }
 
                         content += '</div>';
@@ -107,9 +110,20 @@ function getRecentPhotos(start, end) {
     }
 }
 
-function createCard(i, imageUrl) {
+function createCard(i, imageUrl, username, tipo, hashtags) {
+    
+    var strTipo;
+    
+    try {
+        strTipo = tipo.toString();
+    } catch (e) {
+        strTipo = "Vestito";
+    }
+    
+    var hashtagHtml = createHashtagHTML(hashtags);
+    
     var result = ' \
-        <div class="col s12 m6 l3"> \
+        <div class="col s6 m6 l3"> \
             <div id="image' + i +'" class="card hoverable" style="opacity: 0"> \
                 <div class="card-image waves-effect waves-block waves-light"> \
                     <img class="activator" width="250" style="margin: 0 auto" src="' + imageUrl + '"> \
@@ -117,8 +131,8 @@ function createCard(i, imageUrl) {
                 <div class="card-content"> \
                     <div class="row valign-wrapper" style="margin-bottom: 0"> \
                         <div class="col s8 activator"> \
-                            <span class="card-title grey-text text-darken-4 activator">Photo title</span> \
-                            <p class="activator">Posted by ...</p> \
+                            <span class="card-title grey-text text-darken-4 activator">'+ strTipo + '</span> \
+                            <p class="activator">By ' + username + '</p> \
                         </div> \
                         <div class="col s4 valign"> \
                             <h5 class="valign center-align"> \
@@ -139,11 +153,10 @@ function createCard(i, imageUrl) {
                         </div> \
                         <div class="col s7 valign"> \
                             <h6>Uploaded by</h6> \
-                            <h5>User A</h5> \
+                            <h5>' + username + '</h5> \
                         </div> \
                     </div> \
-                    <div class="chip red darken-4 white-text">#Hashtag</div> \
-                    <div class="chip red darken-4 white-text">#Webapp</div> \
+                    ' + hashtagHtml + ' \
                     <div class="row" style="margin-top: 20px"> \
                         <span class="grey-text text-darken-4"><i class="material-icons left">loyalty</i> Photo item 1</span> \
                     </div> \
@@ -160,6 +173,21 @@ function createCard(i, imageUrl) {
             </div> \
         </div> \
     ';
+    
+    return result;
+}
+
+function createHashtagHTML(hashtags) {
+    
+    if (hashtags == null) {
+        return "";
+    }
+    
+    var result = "";
+    
+    for (var i = 0; i < hashtags.length; i++) {
+        result += '<div class="chip red darken-4 white-text">' + hashtags[i] + '</div>';
+    }
     
     return result;
 }

@@ -387,20 +387,22 @@ module.exports = function(app) {
 
             query.find({
                 success: function(results) {
-                    var Image = require("parse-image");
-
-                    var resizedImages = [];
-
-                    for (var i = 0; i < results.length; i++) {
-
-                        var thumbnail = results[i].get("thumbnail");
-
-                        if (thumbnail != null) {
-                            resizedImages.push(thumbnail.url());
-                        }
-                    }
-
-                    res.send(resizedImages);
+                    
+                    res.send(results);
+//                    var Image = require("parse-image");
+//
+//                    var resizedImages = [];
+//
+//                    for (var i = 0; i < results.length; i++) {
+//
+//                        var thumbnail = results[i].get("thumbnail");
+//
+//                        if (thumbnail != null) {
+//                            resizedImages.push(thumbnail.url());
+//                        }
+//                    }
+//
+//                    res.send(resizedImages);
                 },
                 error: function() {
                     res.send("failed");
