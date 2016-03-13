@@ -7,7 +7,7 @@ Parse.Cloud.define("hello", function(request, response) {
 
 Parse.Cloud.define("sendPushToUser", function(request, response) {
   var senderUser = request.user;
-  var recipientUserId = request.params.recipientId;
+  var recipientUsername = request.params.recipientUsername;
   var message = request.params.message;
 
   // Validate that the sender is allowed to send to the recipient.
@@ -26,10 +26,10 @@ Parse.Cloud.define("sendPushToUser", function(request, response) {
 
   // Send the push.
   // Find devices associated with the recipient user
-  var recipientUser = new Parse.User();
-  recipientUser.id = recipientUserId;
+  // var recipientUser = new Parse.User();
+  // recipientUser.id = recipientUserId;
   var pushQuery = new Parse.Query(Parse.Installation);
-  pushQuery.equalTo("user", recipientUser);
+  pushQuery.equalTo("username", recipientUsername);
  
   // Send the push notification to results of the query
   Parse.Push.send({
