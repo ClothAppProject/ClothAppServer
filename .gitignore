@@ -1,4 +1,4 @@
 # Ignore .parse.project
 .parse.project
-#Ignore parse.exe
+# Ignore parse.exe
 parse.exe

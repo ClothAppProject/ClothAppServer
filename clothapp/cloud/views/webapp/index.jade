@@ -1,0 +1,250 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+
+        title ClothApp
+
+        // JQuery
+        script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.1.min.js')
+        // Materialize CSS
+        link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css', type='text/css')
+        // Materialize JS
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js')
+        // Parse
+        script(src='//www.parsecdn.com/js/parse-1.6.12.min.js')
+        // Custom JS
+        script(src='/js/webapp/index.js')
+        // Import Google Icon Font
+        link(href='http://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+        // Font Awesome
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css')
+    
+    body
+    
+        // Navbar
+        .navbar-fixed.red.darken-4
+            nav.red.darken-4
+                .nav-wrapper
+                    a.brand-logo.center(href='#!') ClothApp
+                    
+                    // Side menu button for mobile devices
+                    a.button-collapse(href='#', data-activates='toggle-collapse')
+                        i.material-icons menu
+                        
+                    // Search text field
+                    ul.hide-on-med-and-down
+                        li
+                            form
+                                .input-field
+                                    input#search(type='search', required='')
+                                    label(for='search')
+                                        i.material-icons search
+                                    i.material-icons close
+                    
+                    // Navbar menu (hidden on mobile devices)
+                    ul.right.hide-on-med-and-down
+                        li
+                            a#loginBtn(href='#', class='modal-trigger', onclick="$('#loginModal').openModal();")
+                                i.fa.fa-sign-in.right
+                                | Login
+                        li
+                            a#signupBtn(href='#', class='modal-trigger', onclick="$('#signupModal').openModal();") 
+                                i.fa.fa-user-plus.right
+                                | Signup
+                        li
+                            a#logoutBtn(href='#', class='modal-trigger', onclick="logout();") 
+                                i.fa.fa-sign-out.right
+                                | Logout
+                    
+                    // Side menu for mobile devices (hidden on desktop)
+                    ul#toggle-collapse.side-nav
+                        li
+                            div.valign-wrapper(style="margin-top: 20px;")
+                                img.circle.valign(src="http://placehold.it/200")
+                        li
+                            a(href='#') 
+                                span.fa-stack.left
+                                    i.fa.fa-circle.fa-stack-2x
+                                    i.fa.fa-sort-amount-desc.fa-stack-1x.fa-inverse
+                                | &nbsp;&nbsp;Most Recent
+                        li
+                            a(href='#')
+                                span.fa-stack.left
+                                    i.fa.fa-circle.fa-stack-2x
+                                    i.fa.fa-heart.fa-stack-1x.fa-inverse
+                                | &nbsp;&nbsp;Top Rated
+                        li
+                            a(href='#')
+                                span.fa-stack.left
+                                    i.fa.fa-circle.fa-stack-2x
+                                    i.fa.fa-shopping-basket.fa-stack-1x.fa-inverse
+                                | &nbsp;&nbsp;Popular Shops
+                        li
+                            a(href='#')
+                                span.fa-stack.left
+                                    i.fa.fa-circle.fa-stack-2x
+                                    i.fa.fa-star.fa-stack-1x.fa-inverse
+                                | &nbsp;&nbsp;Popular Brands
+                        hr
+                        li
+                            a#loginSideBtn(href='#', class='modal-trigger', onclick="$('#loginModal').openModal();")
+                                span.fa-stack.left
+                                    i.fa.fa-circle.fa-stack-2x
+                                    i.fa.fa-sign-in.fa-stack-1x.fa-inverse
+                                | &nbsp;&nbsp;Login
+                        li
+                            a#signupSideBtn(href='#', class='modal-trigger', onclick="$('#signupModal').openModal();") 
+                                span.fa-stack.left
+                                    i.fa.fa-circle.fa-stack-2x
+                                    i.fa.fa-user-plus.fa-stack-1x.fa-inverse
+                                | &nbsp;&nbsp;Signup
+                        li
+                            a#logoutSideBtn(href='#', class='modal-trigger', onclick="logout();")
+                                span.fa-stack.left
+                                    i.fa.fa-circle.fa-stack-2x
+                                    i.fa.fa-sign-out.fa-stack-1x.fa-inverse
+                                | &nbsp;&nbsp;Logout
+        
+        // Tabs
+        .row.red-text.text-darken-4.z-depth-1
+            .col.s12.red-text.text-darken-4
+                ul.tabs.red-text.text-darken-4
+                    li.tab.col.s3
+                        a.active(href='#test1') Most Recent
+                    li.tab.col.s3
+                        a(href='#test2') Top Rated
+                    li.tab.col.s3
+                        a(href='#test3') Popular Shops
+                    li.tab.col.s3
+                        a(href='#test4') Popular Brands
+        
+        // Dynamically created gallery
+        #gallery.row(style="margin-left: 4%; margin-right: 4%")
+        
+        // Progress bar (shown while loading the gallery)
+        #recentGalleryProgress.container
+            .progress.red.lighten-3
+                .indeterminate.red.darken-4
+        
+        // Login form inside a modal
+        #loginModal.modal
+            .modal-content
+                h4 Login
+                hr
+                .row
+                    form#loginForm.col.s12(name="loginForm", onsubmit="return login();")
+                        .row
+                            .input-field.col.s12
+                                input#username.validate(type='text', name="username")
+                                label(for='username') Username
+                        .row
+                            .input-field.col.s12
+                                input#password.validate(type='password', name="password")
+                                label(for='password') Password
+            .modal-footer
+                input.modal-action.waves-effect.waves-red.btn-flat(type="submit", form="loginForm", value="Login")
+                a.modal-action.modal-close.waves-effect.waves-red.btn-flat(href="#!") Cancel
+        
+        // Sign up form inside a modal
+        #signupModal.modal(style="max-height: 100%")
+            .modal-content
+                h4 Sign Up
+                hr
+                .row
+                    form#signupForm.col.s12(name="signupForm", onsubmit="return signup();")
+                        .row
+                            .input-field.col.s12
+                                input#username.validate(type='text', name="username")
+                                label(for='username') Username
+                        .row
+                            .input-field.col.s6
+                                input#password.validate(type='password', name="password")
+                                label(for='password') Password
+                            .input-field.col.s6
+                                input#passwordCheck.validate(type='password', name="passwordCheck")
+                                label(for='passwordCheck') Repeat Password
+                        .row
+                            .input-field.col.s6
+                                input#email.validate(type='email', name="email")
+                                label(for='email') Email
+                            .input-field.col.s6
+                                input#emailCheck.validate(type='email', name="emailCheck")
+                                label(for='emailCheck') Repeat Email
+                        .row
+                            .input-field.col.s6
+                                input#firstName.validate(type='text', name="firstname")
+                                label(for='firstname') First Name
+                            .input-field.col.s6
+                                input#lastName.validate(type='text', name="lastname")
+                                label(for='lastname') Last Name
+                        .row
+                            .input-field.col.s6
+                                input#birthday.datepicker.validate(type='date', name="birthday")
+                                label(for='birthday') Birthday
+                            .input-field.col.s6
+                                input#city.validate(type='text', name="city")
+                                label(for='city') City
+            .modal-footer
+                input.modal-action.waves-effect.waves-red.btn-flat(type="submit", form="signupForm", value="Sign Up")
+                a.modal-action.modal-close.waves-effect.waves-red.btn-flat(href="#!") Cancel
+        
+        // "Upload a photo" form inside a modal
+            #uploadForm.modal
+                .modal-content
+                    h4 Upload a photo
+                    hr
+                    .row
+                        form#uploadForm.col.s12(name="uploadForm")
+                            .row
+                                .input-field.col.s12
+                                    ul.collection.with-header
+                                        li.collection-header
+                                            h4
+                                                input#name-1.validate(type="text", name="name-1")
+                                                label(for="name-1") Name
+                                        li.collection-item
+                                            input#category-1.validate(type="list", name="category-1")
+
+                                    input#username.validate(type='file', name="username")
+                                    label(for='username') Username
+                            .row
+                                .input-field.col.s12
+                                    input#password.validate(type='password', name="password")
+                                    label(for='password') Password
+                .modal-footer
+                    input.modal-action.waves-effect.waves-red.btn-flat(type="submit", form="loginForm", value="Login")
+                    a.modal-action.modal-close.waves-effect.waves-red.btn-flat(href="#!") Cancel
+        
+        // Floating action button. Fixed to the bottom right corner of the screen
+        .fixed-action-btn(style='bottom: 45px; right: 24px;')
+            a#actionButton.btn-floating.btn-large.red.darken-3.z-depth-3
+                label(for="capture")
+                    i.large.material-icons photo_camera
+                input#capture(name='inputImage', type='file', accept='image/*', capture='camera', style="display: none", onchange="upload();")
+        
+        // Page footer
+        footer.page-footer.red.darken-3
+            .container.red.darken-3
+                .row
+                    .col.l6.s12
+                        h5.white-text ClothApp
+                        p.grey-text.text-lighten-4 Thank you for visiting this page.
+                    .col.l4.offset-l2.s12
+                        h5.white-text Links
+                        ul
+                            li
+                                a.grey-text.text-lighten-3(href='#!') Most Recent
+                            li
+                                a.grey-text.text-lighten-3(href='#!') Top Rated
+                            li
+                                a.grey-text.text-lighten-3(href='#!') Popular Shops
+                            li
+                                a.grey-text.text-lighten-3(href='#!') Popular Brands
+            .footer-copyright.red.darken-4
+                .container
+                    | © 2015-2016 ClothApp
+                    a.grey-text.text-lighten-4.right(href='http://clothapp.parseapp.com') Project web page
+            
