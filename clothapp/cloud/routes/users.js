@@ -92,10 +92,11 @@ module.exports = function (app) {
 
 
     // Request: GET '/recentphotos'
-    // Result: Get the recent 20 photos of the gallery.
-    app.get('/recentphotos', function (req, res) {
+    // Result: Get the recent :limit photos of the gallery.
+    app.get('/recentphotos/:limit', function (req, res) {
         var photo = Parse.Object.extend("Photo");
         var query = new Parse.Query(photo);
+        query.limit(parseInt(req.params.limit));
         query.descending("createdAt");
         query.find({
             success: function (results) {
@@ -139,18 +140,17 @@ module.exports = function (app) {
     // Request: GET '/users/:username/followers'
     // Result: Get the users who follow the user with the given username.
     app.get('/users/:username/followers', function (req, res) {
-        var query = new Parse.Query(Parse.User);
-        query.equalTo("username", req.params.username);
+        var photo = Parse.Object.extend("Follow");
+        var query = new Parse.Query(photo);
+        query.equalTo("to", req.params.username);
         query.find({
             success: function (results) {
                 try{
                     if(results.length=== 0) res.send("this username doesn't exist");
                     else{
-                        var utente= results[0];
-                        var followers=utente.get('followers');
-                        //console.log("DEBUG "+utente.get('followers'));
-                        if(typeof followers=='undefined') res.send('undefined');
-                        else res.send(utente.get('followers'));
+                        var followers=[];
+                        for(i = 0; i < results.length; i++) followers.push(results[i].get("from"));
+                        res.send(followers);
                     }
                 }catch(err){res.send("error: "+err.message)}
             },
@@ -163,17 +163,17 @@ module.exports = function (app) {
     // Request: GET '/users/:username/following'
     // Result: Get the followed users of the user with the given username.
     app.get('/users/:username/following', function (req, res) {
-        var query = new Parse.Query(Parse.User);
-        query.equalTo("username", req.params.username);
+        var photo = Parse.Object.extend("Follow");
+        var query = new Parse.Query(photo);
+        query.equalTo("from", req.params.username);
         query.find({
             success: function (results) {
                 try{
                     if(results.length=== 0) res.send("this username doesn't exist");
                     else{
-                        var utente= results[0];
-                        var following=utente.get('following');
-                        if(typeof following=='undefined') res.send('undefined');
-                        else res.send(utente.get('following'));
+                        var following=[];
+                        for(i = 0; i < results.length; i++) following.push(results[i].get("to"));
+                        res.send(following);
                     }
                 }catch(err){res.send("error: "+err.message)}
             },
@@ -183,7 +183,7 @@ module.exports = function (app) {
         });
     });
 
-
+/*
     // Request: GET '/users/:username/shops'
     // Result: Get the favorite shops of the user (person) with the given username.
     app.get('/users/:username/shops', function (req, res) {
@@ -217,7 +217,8 @@ module.exports = function (app) {
             }
         });
     });
-     
+
+
     // Request: GET '/users/:username/shops'
     // Result: Get the favorite virtualshops of the user with the given username.
     app.get('/users/:username/virtualshops', function (req, res) {
@@ -242,9 +243,10 @@ module.exports = function (app) {
         });
     });
 
+
      // Request: GET '/users/:username/shops'
      // Result: Get the favorite virtualshops of the user with the given username.
-     app.get('/users/:username/localshops', function (req, res) {
+     app.get('/users/:username/shops', function (req, res) {
          var persona = Parse.Object.extend("Persona");
          var query = new Parse.Query(persona);
          query.equalTo("username", req.params.username);
@@ -265,7 +267,7 @@ module.exports = function (app) {
               }
          });
      });
-
+*/
      // Request: GET '/users/:username/person'
      // Result: Get the person profile of the user (person) with the given username.
      app.get('/users/person/:username', function (req, res) {
@@ -286,6 +288,28 @@ module.exports = function (app) {
          });
      });
 
+
+     // Request: GET '/users/:username/shop'
+     // Result: Get the profile of the shop with the given username.
+     app.get('/users/shop/:username', function (req, res) {
+         var local = Parse.Object.extend("LocalShop")
+         var query = new Parse.Query(local);
+         query.equalTo("username", req.params.username);
+         query.find({
+             success: function (results) {
+                 if(results.length=== 0) res.send("this localshop doesn't exist");
+                 else{
+                    var utente=results[0];
+                    res.send(utente);
+                 }
+             },
+             error: function () {
+                 res.send("failed");
+             }
+         });
+     });
+
+        /*
      // Request: GET '/users/:username/plocalshop'
      // Result: Get the person profile of the user (person) with the given username.
      app.get('/users/localshop/:username', function (req, res) {
@@ -326,5 +350,5 @@ module.exports = function (app) {
              }
          });
      });
-
+*/
 };
