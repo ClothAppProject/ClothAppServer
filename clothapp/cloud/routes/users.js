@@ -536,6 +536,76 @@ module.exports = function(app) {
             }
         });
     });
+    
+    
+    // Create a new thumbnail preserving the original aspect ratio
+    app.get('/thumbnail/:id', function(req, res) {
+
+        var id = req.params.id;
+        var photoObject;
+
+        var Photo = Parse.Object.extend("Photo");
+
+        var query = new Parse.Query(Photo);
+        query.equalTo("objectId", id);
+
+        query.first({
+            success: function(photo) {
+
+                photoObject = photo;
+
+                var Image = require("parse-image");
+
+                Parse.Cloud.httpRequest({
+                    url: photo.get("photo").url()
+
+                }).then(function(response) {
+                    var image = new Image();
+                    return image.setData(response.buffer);
+
+                }).then(function(image) {
+                    
+                    if (image.width() < image.height()) { // Portrait
+                        return image.scale({
+                            width: 200,
+                            height: (200 * image.height()/image.width())
+                        });
+                    } else {
+                        return image.scale({
+                            width: (200 * image.width()/image.height()),
+                            height: 200
+                        });
+                    }
+
+                }).then(function(image) {
+                    return image.setFormat("JPEG");
+
+                }).then(function(image) {
+                    return image.data();
+
+                }).then(function(buffer) {
+                    var base64 = buffer.toString("base64");
+                    var cropped = new Parse.File("thumbnail.jpg", {
+                        base64: base64
+                    });
+                    return cropped.save();
+
+                }).then(function(cropped) {
+                    photoObject.set("thumbnail", cropped);
+                    return photoObject.save();
+
+                }).then(function(photo) {
+                    res.send(photo);
+
+                }, function(error) {
+                    res.send(error);
+                });
+            },
+            error: function() {
+                res.send("failed");
+            }
+        });
+    });
 
     
     app.get('/createprofilethumbnail/:id', function(req, res) {
