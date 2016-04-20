@@ -416,9 +416,9 @@ module.exports = function(app) {
     });
 
 
-    // Request: GET '/generalGalleryLike/:start/:end'
-    // Result: Get most liked photo from "start" to "end".
-    app.get('/generalGalleryLike/:start/:end', function(req, res) {
+    // Request: GET '/topratedgallery/:start/:end'
+    // Result: Get most liked photos from "start" to "end".
+    app.get('/topratedgallery/:start/:end', function(req, res) {
 
         try {
 
@@ -435,10 +435,15 @@ module.exports = function(app) {
             var query = new Parse.Query(Photo);
             query.skip(start - 1);
             query.limit(delta);
-            query.descending("numeroLike");
+            query.descending("nLike");
 
             query.find({
                 success: function(results) {
+                
+                	res.set('Access-Control-Allow-Origin', '*');
+                    res.send(results);
+                    
+                    /*
                     var Image = require("parse-image");
 
                     var resizedImages = [];
@@ -453,6 +458,7 @@ module.exports = function(app) {
                     }
 
                     res.send(resizedImages);
+                    */
                 },
                 error: function() {
                     res.send("failed");
