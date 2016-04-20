@@ -388,6 +388,7 @@ module.exports = function(app) {
             query.find({
                 success: function(results) {
                     
+                    res.set('Access-Control-Allow-Origin', '*');
                     res.send(results);
 //                    var Image = require("parse-image");
 //
