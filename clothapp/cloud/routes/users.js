@@ -168,7 +168,7 @@ module.exports = function(app) {
     app.get('/users/:username/followers', function(req, res) {
 
         var query = new Parse.Query(Parse.Follow);
-        query.equalTo("from", req.params.username);
+        query.equalTo("to", req.params.username);
         query.find({
             success: function(followers) {
 
