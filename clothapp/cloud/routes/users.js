@@ -173,7 +173,7 @@ module.exports = function(app) {
             success: function(followers) {
 
                 if (followers != null) {
-                    res.send(followers.from);
+                    res.send(followers);
                 } else {
                     res.send([]);
                 }
